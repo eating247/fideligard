@@ -1,0 +1,12 @@
+<h3>currently = {{dateValue}} </h3>
+<form name="dateForm" 
+      ng-click="setDateValue(dateForm)" 
+      ng-keydown="$event.which === 13 && setDateValue(dateForm)">
+  <input type="range" 
+         name="date" 
+         ng-model="dateValue" 
+         min="{{min}}" 
+         max="{{max}}" 
+         value="180">  
+</form>
+  
