@@ -1,18 +1,12 @@
-Fideligard.controller("StocksCtrl", ["$scope", 
-  function($scope) {
+Fideligard.controller("StocksCtrl", ["$scope", "DateService", "StockService", 
+  function($scope, DateService, StockService) {
 
-    $scope.date;
-    $scope.dateValue = 90;
-    $scope.min = 1;
-    $scope.max = 180;
+    $scope.date = function() {
+      return DateService.hyphenFormat();
+    }
 
-    $scope.setDateValue = function(dateForm) {
-      if (dateForm.date.$valid) {
-        $scope.date = new Date(2015, 0, $scope.dateValue);
-        console.log('saving date ' + $scope.date)
-      } else {
-        $scope.dateValue = 90;
-      }
+    $scope.entry = function() {
+      return StockService.getAAPL();
     }
 
 }]);

@@ -10,10 +10,11 @@ Fideligard.config(["$stateProvider", "$urlRouterProvider",
       views: {
         "date": {
           templateUrl: "js/templates/date.html",
-          controller: "StocksCtrl"
+          controller: "DateCtrl"
         },
         "stocks": {
-          templateUrl: "js/templates/stocks.html"
+          templateUrl: "js/templates/stocks.html",
+          controller: "StocksCtrl"
         },
         "portfolio": {
           templateUrl: "js/templates/portfolio.html"

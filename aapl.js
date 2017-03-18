@@ -1,4 +1,4 @@
-{  
+var aapl = {  
    "query":{  
       "count":252,
       "created":"2017-03-17T19:02:35Z",
