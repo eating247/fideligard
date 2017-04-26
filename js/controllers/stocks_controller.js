@@ -6,7 +6,7 @@ Fideligard.controller("StocksCtrl", ["$scope", "DateService", "StockService",
     }
 
     $scope.entry = function() {
-      return StockService.getAAPL();
+      return StockService.stockTableData();
     }
 
 }]);

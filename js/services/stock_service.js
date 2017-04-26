@@ -1,26 +1,29 @@
-Fideligard.factory("StockService", ["_", "DateService",
-  function(_, DateService) {
+Fideligard.factory("StockService", ["_", "DateService", "$http",
+  function(_, DateService, $http) {
     var StockService = {};
 
-    var _aaplQuery = aapl.query.results.quote; // array of stock info by date
+    var _stock = aapl.query.results.quote; // array of stock info by date
 
     StockService.compare = function(index, numDays) {
-      return _aaplQuery[index-numDays].Close;
+      return _stock[index-numDays].Close;
     }
 
-    StockService.getAAPL = function() {
+    StockService.format = function(num) {
+      return Number(num).toFixed(2)
+    }
+
+    StockService.stockTableData = function() {
       var date = DateService.hyphenFormat();
-      var entry = _.find(_aaplQuery, {"Date": date});
-      // populate object for table
+      var entry = _.find(_stock, {"Date": date});
       var stock = {};
       stock.symbol = entry.Symbol;
-      stock.price = Number(entry.Close).toFixed(2); // refactor rounding
+      stock.price = StockService.format(entry.Close); 
 
-      // holes
-      var i = _aaplQuery.indexOf(entry);
-      stock.one = Number(entry.Close - StockService.compare(i, 1)).toFixed(2);
-      stock.seven = Number(entry.Close - StockService.compare(i, 7)).toFixed(2);
-      stock.thirty = Number(entry.Close - StockService.compare(i, 30)).toFixed(2);
+      //holes
+      var i = _stock.indexOf(entry);
+      stock.one = StockService.format(entry.Close - StockService.compare(i, 1));
+      stock.seven = StockService.format(entry.Close - StockService.compare(i, 7));
+      stock.thirty = StockService.format(entry.Close - StockService.compare(i, 30));
       return stock;
     }
 
