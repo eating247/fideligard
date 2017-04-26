@@ -6,4 +6,4 @@ To fire on local server, `run ruby -run -e httpd . -p 3000`
 
 Completed in partnership with [Viking](http://www.vikingcodeschool.com).
 
-Tingting
+[Tingting](tt-wang.me)
