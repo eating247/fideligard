@@ -1,5 +1,9 @@
-<h5 class="text-center">{{displayDate()}} </h5 class="text-center">
-<form name="dateForm" 
+<h5 class="text-center">
+  {{displayDate()}} 
+</h5 class="text-center">
+
+<!-- set new date by clicking or hitting return -->
+<form name="dateForm"  
       ng-click="setDateValue(dateForm)" 
       ng-keydown="$event.which === 13 && setDateValue(dateForm)">
   <input type="range" 

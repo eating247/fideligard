@@ -17,10 +17,9 @@ Fideligard.factory("DateService", ["_",
       var date = _date.toDateString();
       date = date.slice(4, 10) + ',' + date.slice(10)
       return date; // Jan 1, 2017 format
-
-      // return _date.toLocaleDateString() //01-01-17 format
     }
 
+    // processes date input from slider form
     DateService.setDateValue = function(value) {
       _date = new Date(2014, 0, value)
       return _date;
