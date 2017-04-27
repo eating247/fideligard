@@ -12,7 +12,6 @@ Fideligard.factory("StockService", ["_", "DateService", "$http",
       return Number(num).toFixed(2)
     }
 
-
     StockService.stockTableData = function() {
       var date = DateService.hyphenFormat();
       var entry = _.find(_stock, {"Date": date});
