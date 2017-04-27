@@ -2,6 +2,8 @@ Fideligard.factory("StockService", ["_", "DateService", "$http",
   function(_, DateService, $http) {
     var StockService = {};
 
+    var _stockSymbols = ['GOOG', 'MSFT', 'TSLA', 'VTI', 'APPL']
+
     var _stock = aapl.query.results.quote; // array of stock info by date
 
     StockService.compare = function(index, numDays) {
