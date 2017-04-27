@@ -5,8 +5,12 @@ Fideligard.controller("StocksCtrl", ["$scope", "DateService", "StockService",
       return DateService.hyphenFormat();
     }
 
-    $scope.entry = function() {
-      return StockService.stockTableData();
-    }
+    $scope.entry = StockService.stockTableData();
+
+    $scope.$on('change.date', function(event) {
+      console.log('updating date');
+      $scope.entry = StockService.stockTableData();
+    })
+
 
 }]);

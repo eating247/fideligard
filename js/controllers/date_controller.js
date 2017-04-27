@@ -1,5 +1,5 @@
-Fideligard.controller("DateCtrl", ["$scope", "DateService", "StockService",
-  function($scope, DateService, StockService) {
+Fideligard.controller("DateCtrl", ["$scope", "DateService", "StockService", "$rootScope",
+  function($scope, DateService, StockService, $rootScope) {
 
     // initialized date is Mar 31, 2014
     $scope.dateValue = 90;
@@ -11,6 +11,7 @@ Fideligard.controller("DateCtrl", ["$scope", "DateService", "StockService",
     $scope.setDateValue = function(dateForm) {
       if (dateForm.date.$valid) {
         $scope.date = DateService.setDateValue($scope.dateValue);
+        $rootScope.$broadcast('change.date');
         console.log('saving new date ' + $scope.date);
       }
     }
