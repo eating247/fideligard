@@ -44,7 +44,8 @@ Fideligard.factory("StockService",
                })
     }
 
-    StockService.filterDate = function(date) {
+    // return stock data by date
+    _filterDate = function(date) {
       var filtered = [];
       _stocks.forEach( function(stock) {
         filtered.push(
@@ -57,21 +58,24 @@ Fideligard.factory("StockService",
     }
 
     StockService.formatStockData = function() {
-      var date = DateService.hyphenFormat();
-      var stocks = StockService.filterDate(date);
-      var formatted = stocks.map( function(obj) {
+      var stocks = _filterDate( DateService.hyphenFormat() );
+      var oneDayAgo = _filterDate( DateService.nDaysAgo(1) );
+      var sevenDaysAgo = _filterDate( DateService.nDaysAgo(7) );
+      var thirtyDaysAgo = _filterDate( DateService.nDaysAgo(30) );
+      var formatted = stocks.map( function(obj, i) {
         return {
           symbol: obj.Symbol,
           price: _format(obj.Close),
-          one: _format(obj.Close),
-          seven: _format(obj.Close),
-          thirty: _format(obj.Close)
+          one: _format(obj.Close - oneDayAgo[i].Close),
+          seven: _format(obj.Close - sevenDaysAgo[i].Close),
+          thirty: _format(obj.Close - thirtyDaysAgo[i].Close)
         }
       })
       console.log(formatted)
       return formatted;
     }
 
+    // get stock objects from 1 day ago, 7 days ago, 30 days ago
     _format = function(num) {
       return Number(num).toFixed(2)
     }

@@ -2,7 +2,9 @@ Fideligard.factory("DateService", ["_",
   function(_) {
     var DateService = {};
 
-    var _date = new Date(2016, 0, 90); // initialized form value
+    var _value = 90;
+
+    var _date = new Date(2016, 0, _value); // initialized form value
 
     DateService.date = function() {
       return _date;
@@ -21,8 +23,14 @@ Fideligard.factory("DateService", ["_",
 
     // processes date input from slider form
     DateService.setDateValue = function(value) {
-      _date = new Date(2016, 0, value)
+      _value = value;
+      _date = new Date(2016, 0, _value)
       return _date;
+    }
+
+    DateService.nDaysAgo = function(n) {
+      one = new Date(2016, 0, _value - n);
+      return one.toISOString().slice(0,10);
     }
 
     return DateService;
