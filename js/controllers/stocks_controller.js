@@ -6,12 +6,17 @@ Fideligard.controller("StocksCtrl",
       return DateService.hyphenFormat();
     }
 
+    console.log(stockData)
     $scope.stockData = stockData;
+
+    $scope.entry = StockService.filterDate();
+    console.log($scope.entry)
 
     // update stock table with new date selections
     $scope.$on('change.date', function(event) {
       console.log('updating date');
-      $scope.entry = StockService.stockTableData();
+      $scope.entry = StockService.filterDate();
+      console.log($scope.entry)
     })
 
 

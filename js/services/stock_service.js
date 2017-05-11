@@ -28,7 +28,7 @@ Fideligard.factory("StockService",
       return query;
     }
 
-    StockService.stockTableData = function(stockSymbol) {
+    StockService.getStock = function(stockSymbol) {
       return $http({
         method: "GET",
         url: StockService.stockQuery(stockSymbol)
@@ -38,13 +38,11 @@ Fideligard.factory("StockService",
     StockService.all = function() {
       var requests = [];
       for(var i = 0; i < _stockSymbols.length; i++) {
-        console.log(_stockSymbols[i])
-        requests.push(StockService.stockTableData(_stockSymbols[i]))
+        requests.push(StockService.getStock(_stockSymbols[i]))
       }
 
       return $q.all(requests)
                .then(function(response) {
-                  console.log(response.length)
                   for(var i = 0; i < response.length; i++) {
                     _stocks.push(response[i].data.query.results.quote);
                   }
@@ -52,6 +50,18 @@ Fideligard.factory("StockService",
                }, function(response) {
                 console.error(response);
                })
+    }
+
+    StockService.filterDate = function() {
+      var date = DateService.hyphenFormat();
+      var filtered = [];
+      _stocks.forEach( function(stock) {
+        var filteredObj = stock.filter( function(obj) {
+          return obj.Date === date;
+        })
+        filtered.push(filteredObj)
+      })
+      return [].concat.apply([], filtered);
     }
 
     // returns processed data for table formatting to stocks controller
@@ -62,8 +72,6 @@ Fideligard.factory("StockService",
       stock.thirty = StockService.format(entry.Close - StockService.compare(i, 30));
       return stock;
     }
-
-    // function for filtering resolved stocks data obj by date?
 
     return StockService;
   }])
