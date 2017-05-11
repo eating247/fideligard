@@ -1,11 +1,12 @@
-Fideligard.controller("StocksCtrl", ["$scope", "DateService", "StockService",
-  function($scope, DateService, StockService) {
+Fideligard.controller("StocksCtrl", 
+  ["$scope", "DateService", "StockService", "stockData",
+  function($scope, DateService, StockService, stockData) {
 
     $scope.date = function() {
       return DateService.hyphenFormat();
     }
 
-    $scope.entry = StockService.stockTableData();
+    $scope.stockData = stockData;
 
     // update stock table with new date selections
     $scope.$on('change.date', function(event) {

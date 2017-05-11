@@ -19,6 +19,11 @@ Fideligard.config(["$stateProvider", "$urlRouterProvider",
         "portfolio": {
           templateUrl: "js/templates/portfolio.html"
         }
+      },
+      resolve: {
+        stockData: function(StockService) {
+          return StockService.all();
+        }
       }
     })
 }])

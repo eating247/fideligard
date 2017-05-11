@@ -3,9 +3,9 @@ Fideligard.factory("StockService",
   function(_, DateService, $http, $q) {
     var StockService = {};
 
-    var _stockSymbols = ['GOOG', 'MSFT', 'TSLA', 'VTI', 'APPL']
+    var _stockSymbols = ['GOOG', 'MSFT', 'TSLA', 'VTI', 'AAPL']
 
-    var _stocks = {};
+    var _stocks = [];
 
     StockService.compare = function(index, numDays) {
       return _stock[index-numDays].Close;
@@ -25,16 +25,33 @@ Fideligard.factory("StockService",
         '%20and%20endDate%20=%20' + 
         '"2014-06-30"' + 
         '%20&format=json&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=';
-        return query;
+      return query;
     }
 
-    StockService.stockTableData = function() {
-      $http({
+    StockService.stockTableData = function(stockSymbol) {
+      return $http({
         method: "GET",
-        url: StockService.stockQuery('GOOG')
-      }).then(function(response) {
-        console.log(response.data.query.results.quote)
+        url: StockService.stockQuery(stockSymbol)
       })
+    }
+
+    StockService.all = function() {
+      var requests = [];
+      for(var i = 0; i < _stockSymbols.length; i++) {
+        console.log(_stockSymbols[i])
+        requests.push(StockService.stockTableData(_stockSymbols[i]))
+      }
+
+      return $q.all(requests)
+               .then(function(response) {
+                  console.log(response.length)
+                  for(var i = 0; i < response.length; i++) {
+                    _stocks.push(response[i].data.query.results.quote);
+                  }
+                  return _stocks;
+               }, function(response) {
+                console.error(response);
+               })
     }
 
     // returns processed data for table formatting to stocks controller
@@ -45,6 +62,8 @@ Fideligard.factory("StockService",
       stock.thirty = StockService.format(entry.Close - StockService.compare(i, 30));
       return stock;
     }
+
+    // function for filtering resolved stocks data obj by date?
 
     return StockService;
   }])
