@@ -27,6 +27,7 @@ Fideligard.factory("StockService",
       })
     }
 
+    // return stock info for entire interval in date form
     StockService.all = function() {
       var requests = [];
       for(var i = 0; i < _stockSymbols.length; i++) {
@@ -57,8 +58,23 @@ Fideligard.factory("StockService",
       return [].concat.apply([], filtered);
     }
 
-    // fill in holes
-    StockService.formatStockData = function() {
+    // TO DO: fill in holes...
+    StockService.getTableData = function(prevDates) {
+      var date = (prevDates ? DateService.nDaysAgo(prevDates) : DateService.hyphenFormat())
+      console.log('searching stocks for ', date);
+      var stocks = _filterDate( date );
+      if (stocks.length) {
+        console.log('stocks ', stocks)
+        console.log('getting table data')
+        return StockService.formatStockData(stocks);
+      } else {
+        prevDates = ( isNaN(prevDates) ? prevDates++ : 0);
+        console.log(prevDates)
+        StockService.getTableData(prevDates);
+      }
+    }
+
+    StockService.formatStockData = function(stocks) {
       var stocks = _filterDate( DateService.hyphenFormat() );
       var oneDayAgo = _filterDate( DateService.nDaysAgo(1) );
       var sevenDaysAgo = _filterDate( DateService.nDaysAgo(7) );
@@ -73,10 +89,11 @@ Fideligard.factory("StockService",
           thirty: _format(obj.Close - thirtyDaysAgo[i].Close)
         }
       })
-      console.log(formatted)
-      return formatted;
+      console.log(formatted);
+      return formatted;        
     }
 
+    // round to two dec
     _format = function(num) {
       return Number(num).toFixed(2)
     }
