@@ -10,15 +10,17 @@ Fideligard.factory("DateService", ["_",
       return _date;
     }
 
+    // 2017-01-01 format
     DateService.hyphenFormat = function() {
       var date = _date.toISOString().slice(0,10);
-      return date; // 2017-01-01 format
+      return date;
     }
 
+    // Jan 1, 2017 format
     DateService.stringFormat = function() {
       var date = _date.toDateString();
       date = date.slice(4, 10) + ',' + date.slice(10)
-      return date; // Jan 1, 2017 format
+      return date; 
     }
 
     // processes date input from slider form
@@ -28,8 +30,9 @@ Fideligard.factory("DateService", ["_",
       return _date;
     }
 
+    // provides date for selected date - n days
     DateService.nDaysAgo = function(n) {
-      one = new Date(2016, 0, _value - n);
+      one = new Date(2016, 0, (_value - n));
       return one.toISOString().slice(0,10);
     }
 
