@@ -12,7 +12,6 @@ Fideligard.controller("DateCtrl", ["$scope", "DateService", "StockService", "$ro
       if (dateForm.date.$valid) {
         $scope.date = DateService.setDateValue($scope.dateValue);
         $rootScope.$broadcast('change.date');
-        console.log('saving new date ' + $scope.date);
       }
     }
 
