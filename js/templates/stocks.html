@@ -20,7 +20,14 @@
       </tr>  
     </thead>
     <tbody>
-      <tr stock-row entry="entry"></tr>  
+      <tr ng-repeat="stock in tableData">
+        <td>{{stock.symbol}}</td>
+        <td>{{stock.price}}</td>
+        <td>{{stock.one}}</td>
+        <td>{{stock.seven}}</td>
+        <td>{{stock.thirty}}</td>
+        <td><a href="">trade</a></td>
+      </tr>  
     </tbody>
   </table>  
 </div>

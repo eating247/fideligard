@@ -57,6 +57,7 @@ Fideligard.factory("StockService",
       return [].concat.apply([], filtered);
     }
 
+    // fill in holes
     StockService.formatStockData = function() {
       var stocks = _filterDate( DateService.hyphenFormat() );
       var oneDayAgo = _filterDate( DateService.nDaysAgo(1) );

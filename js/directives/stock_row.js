@@ -3,7 +3,7 @@ Fideligard.directive("stockRow", function() {
     templateUrl: "js/templates/stock_row.html",
     restrict: "A",
     scope: {
-      entry: "="
+      tableData: "="
     }
   }
 })
