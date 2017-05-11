@@ -66,7 +66,7 @@ Fideligard.factory("StockService",
 
       var formatted = stocks.map( function(obj, i) {
         return {
-          symbol: obj.Symbol,
+          symbol: decodeURI(obj.Symbol),
           price: _format(obj.Close),
           one: _format(obj.Close - oneDayAgo[i].Close),
           seven: _format(obj.Close - sevenDaysAgo[i].Close),
