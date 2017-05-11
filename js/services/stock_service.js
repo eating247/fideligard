@@ -62,6 +62,7 @@ Fideligard.factory("StockService",
       var oneDayAgo = _filterDate( DateService.nDaysAgo(1) );
       var sevenDaysAgo = _filterDate( DateService.nDaysAgo(7) );
       var thirtyDaysAgo = _filterDate( DateService.nDaysAgo(30) );
+
       var formatted = stocks.map( function(obj, i) {
         return {
           symbol: obj.Symbol,
@@ -75,21 +76,8 @@ Fideligard.factory("StockService",
       return formatted;
     }
 
-    // get stock objects from 1 day ago, 7 days ago, 30 days ago
     _format = function(num) {
       return Number(num).toFixed(2)
-    }
-
-    _compare = function(index, numDays) {
-      return _stock[index-numDays].Close;
-    }
-
-    _getData = function(stock) { 
-      var i = stock.indexOf(entry);
-      stock.one = _format(entry.Close - _compare(i, 1));
-      stock.seven = _format(entry.Close - _compare(i, 7));
-      stock.thirty = _format(entry.Close - _compare(i, 30));
-      return stock;
     }
 
     return StockService;
