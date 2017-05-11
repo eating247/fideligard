@@ -3,7 +3,7 @@ Fideligard.factory("StockService",
   function(_, DateService, $http, $q) {
     var StockService = {};
 
-    var _stockSymbols = ['GOOG', 'MSFT', 'TSLA', 'VTI', 'AAPL']
+    var _stockSymbols = ['GOOG', 'MSFT', 'TSLA', 'VTI', 'AAPL'];
 
     var _stocks = [];
 
@@ -13,9 +13,9 @@ Fideligard.factory("StockService",
         stockSymbol + 
         // date input range
         '%20%22and%20startDate%20=%20' + 
-        '"2014-01-01"' + 
+        '"2016-01-01"' + 
         '%20and%20endDate%20=%20' + 
-        '"2014-06-30"' + 
+        '"2016-06-30"' + 
         '%20&format=json&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=';
       return query;
     }
@@ -72,16 +72,14 @@ Fideligard.factory("StockService",
       return formatted;
     }
 
+    _format = function(num) {
+      return Number(num).toFixed(2)
+    }
 
     _compare = function(index, numDays) {
       return _stock[index-numDays].Close;
     }
 
-    _format = function(num) {
-      return Number(num).toFixed(2)
-    }
-
-    // returns processed data for table formatting to stocks controller
     _getData = function(stock) { 
       var i = stock.indexOf(entry);
       stock.one = _format(entry.Close - _compare(i, 1));

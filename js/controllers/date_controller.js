@@ -1,7 +1,7 @@
 Fideligard.controller("DateCtrl", ["$scope", "DateService", "StockService", "$rootScope",
   function($scope, DateService, StockService, $rootScope) {
 
-    // initialized date is Mar 31, 2014
+    // initialized date is Mar 31, 2016
     $scope.dateValue = 90;
 
     $scope.displayDate = function() {
