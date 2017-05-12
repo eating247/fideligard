@@ -8,14 +8,12 @@ Fideligard.controller("StocksCtrl",
 
     $scope.stockData = stockData; //necessary?
 
-    $scope.tableData = StockService.formatStockData();
-    console.log($scope.tableData)
+    $scope.tableData = StockService.newFormatStockData();
 
     // update stock table with new date selections
     $scope.$on('change.date', function(event) {
       console.log('updating date');
-      $scope.tableData = StockService.formatStockData();
-      console.log($scope.tableData)
+      $scope.tableData = StockService.newFormatStockData();
     })
 
 

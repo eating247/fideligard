@@ -7,23 +7,25 @@ Fideligard.factory("StockService",
 
     var _stocks = [];
 
-    StockService.stockQuery = function(stockSymbol) {
+    var _stockData = {};
+
+    var _query = function(stockSymbol) {
       var query =  
         'http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22' + 
         stockSymbol + 
         // date input range
         '%20%22and%20startDate%20=%20' + 
-        '"2016-01-01"' + 
+        '"2016-06-01"' + 
         '%20and%20endDate%20=%20' + 
-        '"2016-06-30"' + 
+        '"2016-11-27"' + 
         '%20&format=json&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=';
       return query;
     }
 
-    StockService.getStock = function(stockSymbol) {
+    var _getStock = function(stockSymbol) {
       return $http({
         method: "GET",
-        url: StockService.stockQuery(stockSymbol)
+        url: _query(stockSymbol)
       })
     }
 
@@ -31,7 +33,7 @@ Fideligard.factory("StockService",
     StockService.all = function() {
       var requests = [];
       for(var i = 0; i < _stockSymbols.length; i++) {
-        requests.push(StockService.getStock(_stockSymbols[i]))
+        requests.push(_getStock(_stockSymbols[i]))
       }
 
       return $q.all(requests)
@@ -39,14 +41,36 @@ Fideligard.factory("StockService",
                   for(var i = 0; i < response.length; i++) {
                     _stocks.push(response[i].data.query.results.quote);
                   }
-                  return _stocks;
+                  _processData(_stocks)
+                  return _stockData;
                }, function(response) {
                 console.error(response);
                })
     }
 
+    // organize stock info by date + symbol
+    var _processData = function(stocks) {
+      for (var j = 1; j <= 180; j++) {
+        var entry = _stockData[date] = {};
+        var date = DateService.setHyphenDateValue(j);
+        var stocksByDate = _filterDate(date);
+        // if no stock data for current date, retrieves stock info for previous date
+        var counter = 1;
+        while (!stocksByDate.length) {
+          var date = DateService.setHyphenDateValue(j - counter);
+          var stocksByDate = _filterDate(date);
+          counter++;
+        }
+        for (var k = 0; k < stocksByDate.length; k++) {
+          entry[decodeURI(stocksByDate[k].Symbol)] = stocksByDate[k];
+        }
+      }
+      console.table(_stockData);
+      return _stockData;
+    }
+
     // return stock data by date
-    _filterDate = function(date) {
+    var _filterDate = function(date) {
       var filtered = [];
       _stocks.forEach( function(stock) {
         filtered.push(
@@ -58,23 +82,8 @@ Fideligard.factory("StockService",
       return [].concat.apply([], filtered);
     }
 
-    // TO DO: fill in holes...
-    StockService.getTableData = function(prevDates) {
-      var date = (prevDates ? DateService.nDaysAgo(prevDates) : DateService.hyphenFormat())
-      console.log('searching stocks for ', date);
-      var stocks = _filterDate( date );
-      if (stocks.length) {
-        console.log('stocks ', stocks)
-        console.log('getting table data')
-        return StockService.formatStockData(stocks);
-      } else {
-        prevDates = ( isNaN(prevDates) ? prevDates++ : 0);
-        console.log(prevDates)
-        StockService.getTableData(prevDates);
-      }
-    }
-
-    StockService.formatStockData = function(stocks) {
+    StockService.formatStockData = function() {
+      StockService.newFormatStockData();
       var stocks = _filterDate( DateService.hyphenFormat() );
       var oneDayAgo = _filterDate( DateService.nDaysAgo(1) );
       var sevenDaysAgo = _filterDate( DateService.nDaysAgo(7) );
@@ -84,17 +93,38 @@ Fideligard.factory("StockService",
         return {
           symbol: decodeURI(obj.Symbol),
           price: _format(obj.Close),
+          one: _format(obj.Close - oneDayAgo[i].Close) || '--',
+          seven: _format(obj.Close - sevenDaysAgo[i].Close) || '--',
+          thirty: _format(obj.Close - thirtyDaysAgo[i].Close) || '--'
+        }
+      })
+      return formatted;        
+    }
+
+    StockService.newFormatStockData = function() {
+      var date = DateService.hyphenFormat();
+      var stocksAtDate = _stockData[date];
+      var oneDayAgo = _stockData[DateService.nDaysAgo(1)];
+      var sevenDaysAgo = _stockData[DateService.nDaysAgo(7)];
+      var thirtyDaysAgo = _stockData[DateService.nDaysAgo(30)];
+
+      console.log(stocksAtDate)
+      var formatted = stocksAtDate.map(function(stock) {
+        return {
+          symbol: decodeURI(obj.Symbol),
+          price: _format(obj.Close),
           one: _format(obj.Close - oneDayAgo[i].Close),
           seven: _format(obj.Close - sevenDaysAgo[i].Close),
           thirty: _format(obj.Close - thirtyDaysAgo[i].Close)
         }
       })
-      console.log(formatted);
-      return formatted;        
+      console.log(stocksAtDate)
+      return formatted;
+
     }
 
     // round to two dec
-    _format = function(num) {
+    var _format = function(num) {
       return Number(num).toFixed(2)
     }
 
