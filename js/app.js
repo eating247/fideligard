@@ -30,7 +30,8 @@ Fideligard.config(["$stateProvider", "$urlRouterProvider",
       url: '/trade',
       views: {
         "portfolio@": {
-          templateUrl: "js/templates/trade.html"
+          templateUrl: "js/templates/trade.html",
+          controller: "TradeCtrl"
         }
       }
     })

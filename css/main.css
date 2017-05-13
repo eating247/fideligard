@@ -5,9 +5,13 @@
 .template {
   border: 3px solid black;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 5px 10px 30px 15px;
 }
 
 .bottom {
   margin-top: 25px;
+}
+
+table td {
+    border-top: none !important;
 }

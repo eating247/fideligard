@@ -1,12 +1,6 @@
 <div class="row">
-  <div class="col-sm-8"><h2>Portfolio</h2></div>
-  <div class="col-sm-4">        
-<!--         <select class="form-control" id="select">
-          <option><a ui-sref="stocks"></a>Portfolio</option>
-          <option><a ui-sref="stocks.trade">Trade</a></option>
-          <option><a ui-sref="stocks.transactions">Transactions</a></option>
-        </select> -->
-
+  <div class="col-sm-8"><h2>Trade</h2></div>
+  <div class="col-sm-4">
 
           <a ui-sref="stocks">Portfolio</a>
           <a ui-sref="stocks.trade">Trade</a>
@@ -15,4 +9,44 @@
   
 </div>
 
-<h1>trade here</h1>
+<h1>{{hello}}</h1>
+
+
+<div class="row">
+  <div class="col-sm-6">
+
+
+    <form>
+      <table class="table">
+        <tr>
+          <td>Symbol</td>
+          <td><input class="form-control" type="text" name="symbol"></td>
+        </tr>
+        <tr>
+          <td>Buy/Sell</td>
+          <td>select here</td>
+        </tr>
+        <tr>
+          <td>Quantity</td>
+          <td><input class="form-control" type="number" name="quantity"></td>
+        </tr>
+        <tr>
+          <td>Date</td>
+          <td><input class="form-control" type="date" name="date"></td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td>numbers</td>
+        </tr>
+        <tr>
+          <td>Cost</td>
+          <td>more numbers</td>
+        </tr>
+      </table>
+      <button class="btn btn-primary btn-block">Submit</button>
+    </form>
+
+
+
+  </div>
+</div>
