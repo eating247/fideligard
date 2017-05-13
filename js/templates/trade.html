@@ -13,7 +13,7 @@
   <div class="col-sm-7">
 
 
-    <form name="newTrade">
+    <form name="tradeForm">
       <table class="table">
         <tr>
           <td>Symbol</td>
@@ -21,10 +21,12 @@
         </tr>
         <tr>
           <td>Buy/Sell</td>
-          <td><select class="form-control" 
-                      ng-model="newTrade.action"
-                      ng-options="action.value as action.name for action in [{ name: 'Buy', value: true }, { name: 'Sell', value: false }]">
-                      </select></td>
+          <td>
+            <select class="form-control" 
+                    ng-model="newTrade.buy"
+                    ng-options="buy.value as buy.name for buy in [{ name: 'Buy', value: true }, { name: 'Sell', value: false }]">
+                    </select>
+          </td>
         </tr>
         <tr>
           <td>Quantity</td>

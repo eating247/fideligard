@@ -4,16 +4,19 @@ Fideligard.controller("TradeCtrl",
 
     // convert params into newTrade object properties
 
-    console.log('params: ', $stateParams)
-    console.log('symbol: ', $stateParams.symbol)
-    console.log('date: ', $stateParams.date)
-    console.log('price: ', $stateParams.price)
-
     $scope.newTrade = {
-      date: $stateParams.date,
+      date: new Date($stateParams.date),
       price: $stateParams.price,
-      symbol: $stateParams.symbol
-    }
+      symbol: $stateParams.symbol,
+      buy: true,
+
+    };
+
+    console.log('params: ', $scope.newTrade)
+    console.log('symbol: ', $scope.newTrade.symbol)
+    console.log('date: ', $scope.newTrade.date)
+    console.log('price: ', $scope.newTrade.price)
+
 
     $scope.cashAvailable = 1000000;
 
