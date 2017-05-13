@@ -17,7 +17,8 @@ Fideligard.config(["$stateProvider", "$urlRouterProvider",
           controller: "StocksCtrl"
         },
         "portfolio": {
-          templateUrl: "js/templates/portfolio.html"
+          templateUrl: "js/templates/portfolio.html",
+          controller: "PortfolioCtrl"
         }
       },
       resolve: {

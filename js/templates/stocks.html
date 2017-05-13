@@ -11,7 +11,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Symbol</th>
+        <th ng-click="changeSymbolFilter();">Symbol</th>
         <th>Price</th>
         <th>1D</th>
         <th>7D</th>
@@ -20,7 +20,7 @@
       </tr>  
     </thead>
     <tbody>
-      <tr ng-repeat="stock in tableData">
+      <tr ng-repeat="stock in tableData | orderBy: 'symbol' :symbolFilter ">
         <td>{{stock.symbol}}</td>
         <td>{{stock.price}}</td>
         <td>{{stock.one}}</td>

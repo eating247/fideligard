@@ -13,7 +13,7 @@ Fideligard.controller("TradeCtrl",
     };
 
     // from trade service
-    $scope.cash = 1000000;
+    $scope.cash = TradeService.getCash();
 
     $scope.cost = function() {
       return !isNaN($scope.newTrade.quantity) ? ($scope.newTrade.quantity * $scope.newTrade.price) : '--';
