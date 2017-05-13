@@ -12,13 +12,13 @@
 <div class="table-responsive">
   <table class="table table-striped">
     <tr>
-      <th>Date</th>
-      <th>Symbol</th>
-      <th>Type</th>
-      <th>Quantity</th>
-      <th>Price</th>
+      <th role="button" ng-click="changeSort('date')">Date</th>
+      <th role="button" ng-click="changeSort('symbol')">Symbol</th>
+      <th role="button" ng-click="changeSort('type')">Type</th>
+      <th role="button" ng-click="changeSort('quantity')">Quantity</th>
+      <th role="button" ng-click="changeSort('price')">Price</th>
     </tr>
-    <tr ng-repeat="transaction in transactions">
+    <tr ng-repeat="transaction in transactions | orderBy : sortType: sortValue ">
       <td>{{transaction.date}}</td>
       <td>{{transaction.symbol}}</td>
       <td>{{transaction.type ? 'Buy' : 'Sell'}}</td>
