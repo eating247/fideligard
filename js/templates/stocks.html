@@ -11,7 +11,9 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th ng-click="changeSymbolFilter();">Symbol</th>
+        <th role="button" ng-click="changeSymbolFilter();">
+          Symbol <span class="{{symbolFilterValue ? 'glyphicon glyphicon-triangle-bottom' : 'glyphicon glyphicon-triangle-top'}}" aria-hidden="true"></span>
+        </th>
         <th>Price</th>
         <th>1D</th>
         <th>7D</th>
@@ -20,7 +22,7 @@
       </tr>  
     </thead>
     <tbody>
-      <tr ng-repeat="stock in tableData | orderBy: 'symbol' :symbolFilter ">
+      <tr ng-repeat="stock in tableData | orderBy: 'symbol' : symbolFilterValue ">
         <td>{{stock.symbol}}</td>
         <td>{{stock.price}}</td>
         <td>{{stock.one}}</td>

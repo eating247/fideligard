@@ -15,3 +15,7 @@
 table td {
     border-top: none !important;
 }
+
+th {
+    white-space: nowrap;
+}

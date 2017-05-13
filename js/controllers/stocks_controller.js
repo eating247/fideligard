@@ -9,7 +9,7 @@ Fideligard.controller("StocksCtrl",
     $scope.symbolFilterValue = false;
 
     $scope.changeSymbolFilter = function() {
-      $scope.symbolFilter = !$scope.symbolFilter;
+      $scope.symbolFilterValue = !$scope.symbolFilterValue;
     }
 
     $scope.tableData = StockService.newFormatStockData();
