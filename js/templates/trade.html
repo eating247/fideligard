@@ -10,53 +10,51 @@
 
 <div class="row">
   <div class="col-sm-7">
-
-<div class="table-responsive">
-    <form name="tradeForm">
-      <table class="table">
-        <tr>
-          <td>Symbol</td>
-          <td>
-            <!-- <input class="form-control" type="text" ng-model="newTrade.symbol"> -->
-            {{newTrade.symbol}}
-          </td>
-        </tr>
-        <tr>
-          <td>Buy/Sell</td>
-          <td>
-            <select class="form-control" 
-                    ng-model="newTrade.buy"
-                    ng-options="buy.value as buy.name for buy in [{ name: 'Buy', value: true }, { name: 'Sell', value: false }]">
-                    </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Quantity</td>
-          <td><input class="form-control" type="number" ng-model="newTrade.quantity"></td>
-        </tr>
-        <tr>
-          <td>Date</td>
-          <td>
-            <!-- <input class="form-control" disabled type="date" ng-model="newTrade.date" ng-value="{{newTrade.date}}"> -->
-            {{newTrade.date}}
-          </td>
-        </tr>
-        <tr>
-          <td>Price</td>
-          <td>${{newTrade.price}}</td>
-        </tr>
-        <tr>
-          <td>Cost</td>
-          <td>{{cost()}}</td>
-        </tr>
-      </table>
-      <button ng-click="submitTrade()" class="btn btn-primary btn-block">Submit</button>
-    </form>
-</div>
-    
-
-
-
+    <div class="table-responsive">
+        <form name="tradeForm">
+          <table class="table">
+            <tr>
+              <td>Symbol</td>
+              <td>
+                <!-- <input class="form-control" type="text" ng-model="newTrade.symbol"> -->
+                {{newTrade.symbol}}
+              </td>
+            </tr>
+            <tr>
+              <td>Buy/Sell</td>
+              <td>
+                <select class="form-control" 
+                        ng-model="newTrade.buy"
+                        ng-options="buy.value as buy.name for buy in [{ name: 'Buy', value: true }, { name: 'Sell', value: false }]">
+                        </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Quantity</td>
+              <td><input class="form-control" type="number" ng-model="newTrade.quantity"></td>
+            </tr>
+            <tr>
+              <td>Date</td>
+              <td>
+                <!-- <input class="form-control" disabled type="date" ng-model="newTrade.date" ng-value="{{newTrade.date}}"> -->
+                {{newTrade.date}}
+              </td>
+            </tr>
+            <tr>
+              <td>Price</td>
+              <td>${{newTrade.price}}</td>
+            </tr>
+            <tr>
+              <td>Cost</td>
+              <td>
+                <!-- {{!isNaN(newTrade.quantity) ? (newTrade.quantity * newTrade.price) : '--' ; }} -->
+                {{cost}}
+              </td>
+            </tr>
+          </table>
+          <button ng-click="submitTrade()" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
   </div>
 
   <div class="col-sm-4">
