@@ -1,6 +1,6 @@
 Fideligard.controller("TradeCtrl", 
-  ["$scope", "$stateParams",
-  function($scope, $stateParams) {
+  ["$scope", "$stateParams", "TradeService",
+  function($scope, $stateParams, TradeService) {
 
     // convert params into newTrade object properties
 
@@ -26,8 +26,10 @@ Fideligard.controller("TradeCtrl",
     }
 
     $scope.submitTrade = function() {
-      console.log($scope.newTrade)
       // validate
+      if ($scope.orderStatus()) {
+        TradeService.save($scope.newTrade);
+      }
       // create new transaction, store in trade service
     }
 
