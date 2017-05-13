@@ -5,7 +5,7 @@ Fideligard.controller("TradeCtrl",
     // convert params into newTrade object properties
 
     $scope.newTrade = {
-      date: new Date($stateParams.date),
+      date: $stateParams.date,
       price: $stateParams.price,
       symbol: $stateParams.symbol,
       buy: true,
@@ -22,7 +22,14 @@ Fideligard.controller("TradeCtrl",
 
     $scope.orderStatus = false;
 
-    $scope.cost = $scope.newTrade ? ($scope.newTrade.quantity * $scope.price) : '--' ;
+    $scope.cost = function() {
+      var cost = $scope.newTrade && !isNaN($scope.newTrade.quantity) ? ($scope.newTrade.quantity * $scope.price) : '--' ;      
+      return cost;
+    }
+
+
+    $scope.checkValidity = function() {
+    }
 
     $scope.submitTrade = function() {
       console.log($scope.newTrade)
