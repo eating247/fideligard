@@ -8,15 +8,31 @@
   
 </div>
 
+<h5>Click on any column to sort your trades by that criteria.</h5>
 
 <div class="table-responsive">
   <table class="table table-striped">
     <tr>
-      <th role="button" ng-click="changeSort('date')">Date</th>
-      <th role="button" ng-click="changeSort('symbol')">Symbol</th>
-      <th role="button" ng-click="changeSort('type')">Type</th>
-      <th role="button" ng-click="changeSort('quantity')">Quantity</th>
-      <th role="button" ng-click="changeSort('price')">Price</th>
+      <th role="button" ng-click="changeSort('date')">
+        Date
+        <span class="{{sortDisplay('date')}}" aria-hidden="true"></span>
+      </th>
+      <th role="button" ng-click="changeSort('symbol')">
+        Symbol
+        <span class="{{sortDisplay('symbol')}}" aria-hidden="true"></span>
+      </th>
+      <th role="button" ng-click="changeSort('type')">
+        Type
+        <span class="{{sortDisplay('type')}}" aria-hidden="true"></span>
+      </th>
+      <th role="button" ng-click="changeSort('quantity')">
+        Quantity
+        <span class="{{sortDisplay('quantity')}}" aria-hidden="true"></span>
+      </th>
+      <th role="button" ng-click="changeSort('price')">
+        Price
+        <span class="{{sortDisplay('price')}}" aria-hidden="true"></span>
+      </th>
     </tr>
     <tr ng-repeat="transaction in transactions | orderBy : sortType: sortValue ">
       <td>{{transaction.date}}</td>

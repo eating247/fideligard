@@ -10,5 +10,11 @@ Fideligard.controller("TransactionsCtrl",
       console.log($scope.sortType, $scope.sortValue)
     }
 
+    $scope.sortDisplay = function(arg) {
+      if ($scope.sortType === arg) {
+        return $scope.sortValue ? 'glyphicon glyphicon-triangle-top' : 'glyphicon glyphicon-triangle-bottom';
+      }
+    }
+
 
 }]);
