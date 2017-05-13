@@ -64,7 +64,7 @@ Fideligard.factory("StockService",
         // }
         // console.log(_stockData)
         for (var k = 0; k < stocksByDate.length; k++) {
-          entry[decodeURI(stocksByDate[k].Symbol)] = stocksByDate[k].Close;
+          entry[stocksByDate[k].Symbol.replace(/%20/g, "")] = stocksByDate[k].Close;
         }
       }
 
@@ -107,7 +107,7 @@ Fideligard.factory("StockService",
 
       var formatted = stocks.map( function(obj, i) {
         return {
-          symbol: decodeURI(obj.Symbol),
+          symbol: (obj.Symbol),
           price: _format(obj.Close),
           one: _format(obj.Close - oneDayAgo[i].Close) || '--',
           seven: _format(obj.Close - sevenDaysAgo[i].Close) || '--',
