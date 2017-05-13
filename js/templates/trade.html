@@ -46,9 +46,7 @@
             </tr>
             <tr>
               <td>Cost</td>
-              <td>
-              {{!isNaN(newTrade.quantity) ? (newTrade.quantity *  newTrade.price) : '--'}}
-              <!-- ${{cost.toFixed(2)}} --></td>
+              <td>${{cost().toFixed(2)}}</td>
             </tr>
           </table>
           <button ng-click="submitTrade()" class="btn btn-primary btn-block">Submit</button>
@@ -60,6 +58,6 @@
     <h4>Cash Available:</h4>
     <p>${{cash.toFixed(2)}}</p>
     <h4>Order Status</h4>
-    <h5 class="{{(orderStatus) ? 'text-success' : 'text-danger'}}">{{(orderStatus) ? 'VALID' : 'INVALID'}}</h5>
+    <h5 class="{{orderStatus ? 'text-success' : 'text-danger'}}">{{orderStatus ? 'VALID' : 'INVALID'}}</h5>
   </div>
 </div>

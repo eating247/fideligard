@@ -13,9 +13,12 @@ Fideligard.controller("TradeCtrl",
 
     };
 
+    // from trade service
     $scope.cash = 1000000;
 
-    $scope.cost = !isNaN($scope.newTrade.quantity) ? ($scope.newTrade.quantity * $scope.newTrade.price) : '--' ;  
+    $scope.cost = function() {
+      return !isNaN($scope.newTrade.quantity) ? ($scope.newTrade.quantity * $scope.newTrade.price) : '--';
+    }
 
     $scope.orderStatus = $scope.cost < $scope.cash ? true : false;
 
@@ -28,7 +31,7 @@ Fideligard.controller("TradeCtrl",
     $scope.submitTrade = function() {
       console.log($scope.newTrade)
       // validate
-      // create new transaction
+      // create new transaction, store in trade service
     }
 
 }]);
