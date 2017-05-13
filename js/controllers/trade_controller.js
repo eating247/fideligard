@@ -26,12 +26,11 @@ Fideligard.controller("TradeCtrl",
     }
 
     $scope.submitTrade = function() {
-      // validate
+      // validate + store in trade service
       if ($scope.orderStatus()) {
         TradeService.save($scope.newTrade);
         $state.go('stocks.transactions');
       }
-      // create new transaction, store in trade service
     }
 
 }]);

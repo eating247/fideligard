@@ -8,6 +8,7 @@
   
 </div>
 
+
 <div class="table-responsive">
   <table class="table table-striped">
     <tr>
@@ -16,6 +17,13 @@
       <th>Type</th>
       <th>Quantity</th>
       <th>Price</th>
+    </tr>
+    <tr ng-repeat="transaction in transactions">
+      <td>{{transaction.date}}</td>
+      <td>{{transaction.symbol}}</td>
+      <td>{{transaction.type}}</td>
+      <td>{{transaction.quantity}}</td>
+      <td>{{transaction.price}}</td>
     </tr>
   </table>
 </div>

@@ -44,7 +44,8 @@ Fideligard.config(["$stateProvider", "$urlRouterProvider",
       url: '/transactions',
       views: {
         "portfolio@": {
-          templateUrl: "js/templates/transactions.html"
+          templateUrl: "js/templates/transactions.html",
+          controller: "TransactionsCtrl"
         }
       }
     })
