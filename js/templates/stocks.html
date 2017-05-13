@@ -3,7 +3,7 @@
     <h2>Stocks</h2>
   </div>
   <div class="col-sm-7 bottom">
-    <input type="date" class="form-control input-sm pull-right" ng-value="date()">
+    <input type="date" class="form-control input-sm pull-right" ng-value="date">
   </div>
 </div>
 
@@ -28,7 +28,7 @@
         <td>{{stock.one}}</td>
         <td>{{stock.seven}}</td>
         <td>{{stock.thirty}}</td>
-        <td><a ui-sref="stocks.trade({ symbol: stock.symbol, price: {{stock.price}}, date: date() })">Trade</a></td>
+        <td><a ui-sref="stocks.trade({ symbol: stock.symbol, price: {{stock.price}}, date: date })">Trade</a></td>
       </tr>  
     </tbody>
   </table>  
