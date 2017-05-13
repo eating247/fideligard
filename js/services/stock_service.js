@@ -23,6 +23,7 @@ Fideligard.factory("StockService",
     }
 
     var _getStock = function(stockSymbol) {
+      console.log('calling')
       return $http({
         method: "GET",
         url: _query(stockSymbol)
@@ -51,21 +52,36 @@ Fideligard.factory("StockService",
     // organize stock info by date + symbol
     var _processData = function(stocks) {
       for (var j = 1; j <= 180; j++) {
-        var entry = _stockData[date] = {};
         var date = DateService.setHyphenDateValue(j);
+        var entry = _stockData[date] = {};
         var stocksByDate = _filterDate(date);
         // if no stock data for current date, retrieves stock info for previous date
-        var counter = 1;
-        while (!stocksByDate.length) {
-          var date = DateService.setHyphenDateValue(j - counter);
-          var stocksByDate = _filterDate(date);
-          counter++;
-        }
+        // var counter = 1;
+        // while (!stocksByDate.length) {
+        //   var date = DateService.setHyphenDateValue(j - counter);
+        //   var stocksByDate = _filterDate(date);
+        //   counter++;
+        // }
+        // console.log(_stockData)
         for (var k = 0; k < stocksByDate.length; k++) {
-          entry[decodeURI(stocksByDate[k].Symbol)] = stocksByDate[k];
+          entry[decodeURI(stocksByDate[k].Symbol)] = stocksByDate[k].Close;
         }
       }
-      console.table(_stockData);
+
+      // fill in holes for data
+      for (var j = 1; j <= 180; j++) {
+        var date = DateService.setHyphenDateValue(j);
+        var entry = _stockData[date];
+        var stocksByDate = _filterDate(date);
+        if (!stocksByDate.length) {
+          console.log('identified hole at ', date)
+          var dateBefore = DateService.setHyphenDateValue(j-1);
+          console.log('plugging with data at ', dateBefore)
+          var entryBefore = _stockData[dateBefore];
+          console.log('plugging data: ', entryBefore)
+          var entry = $.extend({}, entryBefore);
+        }
+      }
       return _stockData;
     }
 
@@ -108,19 +124,18 @@ Fideligard.factory("StockService",
       var sevenDaysAgo = _stockData[DateService.nDaysAgo(7)];
       var thirtyDaysAgo = _stockData[DateService.nDaysAgo(30)];
 
-      console.log(stocksAtDate)
-      var formatted = stocksAtDate.map(function(stock) {
-        return {
-          symbol: decodeURI(obj.Symbol),
-          price: _format(obj.Close),
-          one: _format(obj.Close - oneDayAgo[i].Close),
-          seven: _format(obj.Close - sevenDaysAgo[i].Close),
-          thirty: _format(obj.Close - thirtyDaysAgo[i].Close)
-        }
+      var displayedData = [];
+      Object.keys(stocksAtDate).forEach(function(sym) {
+        var obj = stocksAtDate[sym];
+        displayedData.push({
+          symbol: sym,
+          price: _format(obj),
+          one: _format(obj - oneDayAgo[sym]),
+          seven: _format(obj - sevenDaysAgo[sym]),
+          thirty: _format(obj - thirtyDaysAgo[sym])
+        })
       })
-      console.log(stocksAtDate)
-      return formatted;
-
+      return displayedData;
     }
 
     // round to two dec

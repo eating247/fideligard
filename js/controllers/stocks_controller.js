@@ -6,8 +6,6 @@ Fideligard.controller("StocksCtrl",
       return DateService.hyphenFormat();
     }
 
-    $scope.stockData = stockData; //necessary?
-
     $scope.tableData = StockService.newFormatStockData();
 
     // update stock table with new date selections

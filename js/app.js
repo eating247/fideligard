@@ -2,11 +2,11 @@ var Fideligard = angular.module("Fideligard", ['ui.router']);
 
 Fideligard.config(["$stateProvider", "$urlRouterProvider", 
   function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise("/")
+  $urlRouterProvider.otherwise("/stocks")
 
   $stateProvider
-    .state('default', {
-      url: '/',
+    .state('stocks', {
+      url: '/stocks',
       views: {
         "date": {
           templateUrl: "js/templates/date.html",
@@ -23,6 +23,22 @@ Fideligard.config(["$stateProvider", "$urlRouterProvider",
       resolve: {
         stockData: function(StockService) {
           return StockService.all();
+        }
+      }
+    })
+    .state('stocks.trade', {
+      url: '/trade',
+      views: {
+        "portfolio@": {
+          templateUrl: "js/templates/trade.html"
+        }
+      }
+    })
+    .state('stocks.transactions', {
+      url: '/transactions',
+      views: {
+        "portfolio@": {
+          templateUrl: "js/templates/transactions.html"
         }
       }
     })
