@@ -9,5 +9,9 @@ Fideligard.factory("TradeService", ["_",
       _trades.push(newTrade);
     }
 
+    TradeService.deliverTrades = function() {
+      return _trades;
+    }
+
     return TradeService;
   }])
