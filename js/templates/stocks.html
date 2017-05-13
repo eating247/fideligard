@@ -24,7 +24,7 @@
     <tbody>
       <tr ng-repeat="stock in tableData | orderBy: 'symbol' : symbolFilterValue ">
         <td>{{stock.symbol}}</td>
-        <td>{{stock.price}}</td>
+        <td>{{stock.price | currency}}</td>
         <td>{{stock.one}}</td>
         <td>{{stock.seven}}</td>
         <td>{{stock.thirty}}</td>

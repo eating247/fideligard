@@ -1,8 +1,10 @@
 Fideligard.controller("PortfolioCtrl", 
-  ["$scope", "TradeService",
-  function($scope, TradeService) {
+  ["$scope", "TradeService", "DateService", "PortfolioService",
+  function($scope, TradeService, DateService, PortfolioService) {
 
-    $scope.cash = TradeService.getCash();
+    $scope.date = DateService.stringFormat();
+
+    $scope.positions = PortfolioService.getPositions();
 
 
 }]);

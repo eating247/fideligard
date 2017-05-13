@@ -1,6 +1,8 @@
 Fideligard.controller("TradeCtrl", 
-  ["$scope", "$stateParams", "TradeService", "$state",
-  function($scope, $stateParams, TradeService, $state) {
+  ["$scope", "$stateParams", "StockService", "TradeService", "$state",
+  function($scope, $stateParams, StockService, TradeService, $state) {
+
+    var _stocks = StockService.formatStockData();
 
     // convert params into newTrade
     $scope.newTrade = {

@@ -71,8 +71,9 @@ Fideligard.factory("StockService",
         var date = DateService.setHyphenDateValue(j);
         var entry = _stockData[date];
         var stocksByDate = _filterDate(date);
+        // if no data found for a specific date, substitute with data from day before
         if (!stocksByDate.length) {
-          var dateBefore = DateService.setHyphenDateValue(j-1);
+          var dateBefore = DateService.setHyphenDateValue(j - 1);
           var entryBefore = _stockData[dateBefore];
           var entry = $.extend({}, entryBefore);
         }
