@@ -39,7 +39,7 @@
       <td>{{transaction.symbol}}</td>
       <td>{{transaction.type ? 'Buy' : 'Sell'}}</td>
       <td>{{transaction.quantity}}</td>
-      <td>{{transaction.price}}</td>
+      <td>{{transaction.price | currency}}</td>
     </tr>
   </table>
 </div>
