@@ -21,7 +21,7 @@
     <tr ng-repeat="transaction in transactions">
       <td>{{transaction.date}}</td>
       <td>{{transaction.symbol}}</td>
-      <td>{{transaction.type}}</td>
+      <td>{{transaction.type ? 'Buy' : 'Sell'}}</td>
       <td>{{transaction.quantity}}</td>
       <td>{{transaction.price}}</td>
     </tr>
