@@ -13,22 +13,16 @@ Fideligard.controller("TradeCtrl",
 
     };
 
-    console.log('params: ', $scope.newTrade)
-    console.log('symbol: ', $scope.newTrade.symbol)
-    console.log('date: ', $scope.newTrade.date)
-    console.log('price: ', $scope.newTrade.price)
-
-
-    $scope.cashAvailable = 1000000;
-
-    $scope.orderStatus = false;
+    $scope.cash = 1000000;
 
     $scope.cost = !isNaN($scope.newTrade.quantity) ? ($scope.newTrade.quantity * $scope.newTrade.price) : '--' ;  
 
+    $scope.orderStatus = $scope.cost < $scope.cash ? true : false;
 
     $scope.checkValidity = function() {
+      $scope.cost < $scope.cash ? true : false;
       // cost is less than cash on hand
-      // 
+      // TO DO: can't sell stocks not in portfolio
     }
 
     $scope.submitTrade = function() {
@@ -36,6 +30,5 @@ Fideligard.controller("TradeCtrl",
       // validate
       // create new transaction
     }
-
 
 }]);
