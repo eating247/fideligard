@@ -12,12 +12,12 @@ Fideligard.controller("StocksCtrl",
       $scope.symbolFilterValue = !$scope.symbolFilterValue;
     }
 
-    $scope.tableData = StockService.newFormatStockData();
+    $scope.tableData = StockService.formatStockData();
 
     // update stock table with new date selections
     $scope.$on('change.date', function(event) {
       console.log('updating date');
-      $scope.tableData = StockService.newFormatStockData();
+      $scope.tableData = StockService.formatStockData();
     })
 
 

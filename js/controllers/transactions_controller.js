@@ -7,7 +7,6 @@ Fideligard.controller("TransactionsCtrl",
     $scope.changeSort = function(arg) {
       $scope.sortType = arg;
       $scope.sortValue = !$scope.sortValue;
-      console.log($scope.sortType, $scope.sortValue)
     }
 
     $scope.sortDisplay = function(arg) {

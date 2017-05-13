@@ -2,8 +2,7 @@ Fideligard.controller("TradeCtrl",
   ["$scope", "$stateParams", "TradeService", "$state",
   function($scope, $stateParams, TradeService, $state) {
 
-    // convert params into newTrade object properties
-
+    // convert params into newTrade
     $scope.newTrade = {
       date: $stateParams.date,
       price: $stateParams.price,
@@ -12,7 +11,6 @@ Fideligard.controller("TradeCtrl",
       type: true,
     };
 
-    // from trade service
     $scope.cash = TradeService.getCash();
 
     $scope.cost = function() {

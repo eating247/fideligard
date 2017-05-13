@@ -23,7 +23,6 @@ Fideligard.factory("StockService",
     }
 
     var _getStock = function(stockSymbol) {
-      console.log('calling')
       return $http({
         method: "GET",
         url: _query(stockSymbol)
@@ -56,13 +55,12 @@ Fideligard.factory("StockService",
         var entry = _stockData[date] = {};
         var stocksByDate = _filterDate(date);
         // if no stock data for current date, retrieves stock info for previous date
-        // var counter = 1;
-        // while (!stocksByDate.length) {
-        //   var date = DateService.setHyphenDateValue(j - counter);
-        //   var stocksByDate = _filterDate(date);
-        //   counter++;
-        // }
-        // console.log(_stockData)
+        var counter = 1;
+        while (!stocksByDate.length) {
+          var date = DateService.setHyphenDateValue(j - counter);
+          var stocksByDate = _filterDate(date);
+          counter++;
+        }
         for (var k = 0; k < stocksByDate.length; k++) {
           entry[stocksByDate[k].Symbol.replace(/%20/g, "")] = stocksByDate[k].Close;
         }
@@ -74,11 +72,8 @@ Fideligard.factory("StockService",
         var entry = _stockData[date];
         var stocksByDate = _filterDate(date);
         if (!stocksByDate.length) {
-          console.log('identified hole at ', date)
           var dateBefore = DateService.setHyphenDateValue(j-1);
-          console.log('plugging with data at ', dateBefore)
           var entryBefore = _stockData[dateBefore];
-          console.log('plugging data: ', entryBefore)
           var entry = $.extend({}, entryBefore);
         }
       }
@@ -99,25 +94,6 @@ Fideligard.factory("StockService",
     }
 
     StockService.formatStockData = function() {
-      StockService.newFormatStockData();
-      var stocks = _filterDate( DateService.hyphenFormat() );
-      var oneDayAgo = _filterDate( DateService.nDaysAgo(1) );
-      var sevenDaysAgo = _filterDate( DateService.nDaysAgo(7) );
-      var thirtyDaysAgo = _filterDate( DateService.nDaysAgo(30) );
-
-      var formatted = stocks.map( function(obj, i) {
-        return {
-          symbol: (obj.Symbol),
-          price: _format(obj.Close),
-          one: _format(obj.Close - oneDayAgo[i].Close) || '--',
-          seven: _format(obj.Close - sevenDaysAgo[i].Close) || '--',
-          thirty: _format(obj.Close - thirtyDaysAgo[i].Close) || '--'
-        }
-      })
-      return formatted;        
-    }
-
-    StockService.newFormatStockData = function() {
       var date = DateService.hyphenFormat();
       var stocksAtDate = _stockData[date];
       var oneDayAgo = _stockData[DateService.nDaysAgo(1)];
