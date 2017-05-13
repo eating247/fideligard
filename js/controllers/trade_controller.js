@@ -8,5 +8,9 @@ Fideligard.controller("TradeCtrl",
 
     $scope.orderStatus = 'VALID';
 
+    $scope.submitTrade = function() {
+      console.log($scope.newTrade)
+    }
+
 
 }]);

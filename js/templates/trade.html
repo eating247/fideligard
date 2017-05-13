@@ -13,23 +13,26 @@
   <div class="col-sm-7">
 
 
-    <form>
+    <form name="newTrade">
       <table class="table">
         <tr>
           <td>Symbol</td>
-          <td><input class="form-control" type="text" name="symbol"></td>
+          <td><input class="form-control" type="text" ng-model="newTrade.symbol"></td>
         </tr>
         <tr>
           <td>Buy/Sell</td>
-          <td>select here</td>
+          <td><select class="form-control" 
+                      ng-model="newTrade.action"
+                      ng-options="action.value as action.name for action in [{ name: 'Buy', value: true }, { name: 'Sell', value: false }]">
+                      </select></td>
         </tr>
         <tr>
           <td>Quantity</td>
-          <td><input class="form-control" type="number" name="quantity"></td>
+          <td><input class="form-control" type="number" ng-model="newTrade.quantity"></td>
         </tr>
         <tr>
           <td>Date</td>
-          <td><input class="form-control" type="date" name="date"></td>
+          <td><input class="form-control" type="date" ng-model="newTrade.date"></td>
         </tr>
         <tr>
           <td>Price</td>
@@ -40,7 +43,7 @@
           <td>more numbers</td>
         </tr>
       </table>
-      <button class="btn btn-primary btn-block">Submit</button>
+      <button ng-click="submitTrade()" class="btn btn-primary btn-block">Submit</button>
     </form>
 
 
@@ -49,7 +52,7 @@
 
   <div class="col-sm-offset-1 col-sm-4">
     <h4>Cash Available:</h4>
-    <p>{{cashAvailable}}</p>
+    <p>${{cashAvailable.toFixed(2)}}</p>
     <h4>Order Status</h4>
     <h5>{{orderStatus}}</h5>
   </div>
