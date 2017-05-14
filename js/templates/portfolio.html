@@ -9,7 +9,7 @@
 </div>
 
 <h5 class="text-muted"> as of {{date}}</h5>
-<h1>{{positions}}</h1>
+<p>{{positions}}</p>
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -36,10 +36,10 @@
       <th>1D</th>
       <th>7D</th>
       <th>30D</th>
-      <th>Trade?</th>
+      <th>Trade</th>
     </tr>
     <tr ng-repeat="position in positions">
-      <td>symbol here</td>
+      <td>{{position.symbol}}</td>
       <td>{{position.quantity}}</td>
       <td>{{position.costBasis}}</td>
       <td>{{position.currentVal}}</td>
@@ -48,7 +48,7 @@
       <td>{{position.one}}</td>
       <td>{{position.seven}}</td>
       <td>{{position.thirty}}</td>
-      <td><a ui-sref="stocks.trade">trade</a></td>
+      <td><a ui-sref="stocks.trade">Trade</a></td>
     </tr>
   </table>  
 </div>

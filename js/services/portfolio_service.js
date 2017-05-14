@@ -29,7 +29,6 @@ Fideligard.factory("PortfolioService",
           //if position obj doesn't exist for trades for this symbol, create one + populate with price info relative to selected date
           console.log('creating position for ', trade.symbol)
           var currentPrices = _findPrices(trade.symbol);
-          console.log('prices ', currentPrices)
           _positions.push(
                 position = {
                 symbol: trade.symbol,
@@ -64,7 +63,7 @@ Fideligard.factory("PortfolioService",
     }
 
     var _findPrices = function(sym) {
-      return StockService.formatStockData().filter( function(stock) {
+      return StockService.formatStockData().find( function(stock) {
         return stock.symbol === sym
       })
     }
