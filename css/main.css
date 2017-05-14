@@ -20,7 +20,7 @@ th {
     white-space: nowrap;
 }
 
-a, a:hover, a:focus {
+button a, a:hover, a:focus {
   color: white;
   text-decoration: none;
 }

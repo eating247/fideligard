@@ -25,5 +25,6 @@
       <tr stock-table-row ng-repeat="stock in tableData | orderBy: 'symbol' : symbolFilterValue " stock="stock" date="date">
       </tr>  
     </tbody>
-  </table>  
+  </table>
+  <small class="text-muted">*1D, 7D, and 30D columns refer to respective price changes from one, seven, and thirty calendar days before the selected date.</small>  
 </div>
