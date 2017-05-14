@@ -22,7 +22,7 @@ Fideligard.factory("PortfolioService",
         var position = PortfolioService.findPos(trade.symbol);
         console.log(trade.symbol, position, 'position')
         if (!position) {
-          //if position obj doesn't exist for trades for this symbol, create one + populate with price info relative to selected date
+          // if position obj doesn't exist for trades for this symbol, create + populate with price info relative to selected date
           console.log('creating position for ', trade.symbol)
           var currentPrices = _findPrices(trade.symbol);
           _positions.push(
@@ -38,7 +38,7 @@ Fideligard.factory("PortfolioService",
                 thirty: currentPrices.thirty
           })
         }
-        // collect trade info: quantity, cost basis, current value, profit/loss (based on buy/sell)
+        // collect trade info
         var type = trade.type ? 1 : -1;
         position.quantity += type * trade.quantity;
         position.costBasis += type * trade.quantity * trade.price;
@@ -62,6 +62,17 @@ Fideligard.factory("PortfolioService",
       })
     }
 
+    PortfolioService.findPos = function(sym) {
+      return _positions.find(function(position) {
+        return position.symbol === sym;
+      })
+    }
+
+    PortfolioService.getPositions = function() {
+      _getPositions();
+      return _positions;
+    }
+
     var _getOverview = function() {
       _overview = {
         costBasis: 0,
@@ -72,17 +83,6 @@ Fideligard.factory("PortfolioService",
         _overview.costBasis += position.costBasis;
         _overview.currentVal += position.currentVal;
       })
-    }
-
-    PortfolioService.findPos = function(sym) {
-      return _positions.find(function(position) {
-        return position.symbol === sym;
-      })
-    }
-
-    PortfolioService.getPositions = function() {
-      _getPositions();
-      return _positions;
     }
 
     PortfolioService.getOverview = function() {
