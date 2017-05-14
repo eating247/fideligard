@@ -9,22 +9,25 @@
 </div>
 
 <h5 class="text-muted"> as of {{date}}</h5>
-<p>{{positions}}</p>
 
-<div class="table-responsive">
+<h4 ng-hide="{{positions.length}}" class="text-center">You haven't made any trades yet!</h4>
+
+<div ng-show="{{positions.length}}" class="table-responsive">
   <table class="table table-striped">
     <tr>
       <th>Cost Basis</th>
       <th>Current Value</th>
       <th>Profit/Loss</th>
-      <th>1D</th>
-      <th>7D</th>
-      <th>30D</th>
+    </tr>
+    <tr>
+      <td>{{ overview.costBasis.toFixed(2) }}</td>
+      <td>{{ overview.currentVal.toFixed(2) }}</td>
+      <td>{{ overview.costBasis - overview.currentVal }}</td>
     </tr>
   </table>
 </div>
 
-<div class="table-responsive">
+<div ng-show="{{positions.length}}" class="table-responsive">
   <table class="table table-striped">
     <tr>
       <th>Symbol</th>

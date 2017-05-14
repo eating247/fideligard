@@ -7,13 +7,11 @@ Fideligard.factory("PortfolioService",
       return DateService.hyphenFormat();
     }
 
-    // var _seeded = [{date: "2016-06-21", price: "695.94", symbol: "GOOG", quantity: 10, type: true}, {date: "2016-06-21", price: "695.94", symbol: "GOOG", quantity: 10, type: true}, {date: "2016-06-21", price: "695.94", symbol: "GOOG", quantity: 10, type: true}]
-
     var _trades = TradeService.getTrades();
 
     var _positions = []; //data for lower table
 
-    var _overview = []; // data for upper table
+    var _overview; // data for upper table
 
     var _getPositions = function() {
       // console.log('filtering', _trades.length, 'trades')
@@ -73,9 +71,26 @@ Fideligard.factory("PortfolioService",
       })
     }
 
+    var _getOverview = function() {
+      _overview = {
+        costBasis: 0,
+        currentVal: 0
+      }
+      
+      _positions.forEach(function(position) {
+        _overview.costBasis += position.costBasis;
+        _overview.currentVal += position.currentVal;
+      })
+    }
+
     PortfolioService.getPositions = function() {
       _getPositions();
       return _positions;
+    }
+
+    PortfolioService.getOverview = function() {
+      _getOverview();
+      return _overview;
     }
 
     return PortfolioService;
