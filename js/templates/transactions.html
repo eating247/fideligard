@@ -26,12 +26,12 @@
         <span class="{{sortDisplay('price')}}" aria-hidden="true"></span>
       </th>
     </tr>
-    <tr ng-repeat="transaction in transactions | orderBy : sortType: sortValue ">
-      <td>{{transaction.date}}</td>
+    <tr transaction-table-row ng-repeat="transaction in transactions | orderBy : sortType: sortValue" transaction="transaction">
+<!--       <td>{{transaction.date}}</td>
       <td>{{transaction.symbol}}</td>
       <td>{{transaction.type ? 'Buy' : 'Sell'}}</td>
       <td>{{transaction.quantity}}</td>
-      <td>{{transaction.price | currency}}</td>
+      <td>{{transaction.price | currency}}</td> -->
     </tr>
   </table>
 </div>
