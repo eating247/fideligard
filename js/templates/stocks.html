@@ -2,8 +2,8 @@
   <div class="col-sm-5">
     <h2>Stocks</h2>
   </div>
-  <div class="col-sm-7 bottom">
-    <input type="date" class="form-control input-sm pull-right" ng-value="date">
+  <div class="col-sm-7 bottom clearfix">
+    <h4 class="pull-right">{{displayDate}}</h4>
   </div>
 </div>
 
@@ -22,13 +22,7 @@
       </tr>  
     </thead>
     <tbody>
-      <tr ng-repeat="stock in tableData | orderBy: 'symbol' : symbolFilterValue ">
-        <td>{{stock.symbol}}</td>
-        <td>{{stock.price | currency}}</td>
-        <td>{{stock.one}}</td>
-        <td>{{stock.seven}}</td>
-        <td>{{stock.thirty}}</td>
-        <td><a ui-sref="stocks.trade({ symbol: stock.symbol, price: {{stock.price}}, date: date })">Trade</a></td>
+      <tr stock-table-row ng-repeat="stock in tableData | orderBy: 'symbol' : symbolFilterValue " stock="stock" date="date">
       </tr>  
     </tbody>
   </table>  
