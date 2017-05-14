@@ -81,7 +81,7 @@ Fideligard.factory("StockService",
       return _stockData;
     }
 
-    // return stock data by date
+    // return all stock data for specified date
     var _filterDate = function(date) {
       var filtered = [];
       _stocks.forEach( function(stock) {
@@ -116,6 +116,7 @@ Fideligard.factory("StockService",
     }
 
     // round to two dec
+    // TO DO: more formatting...currency format? add + for increases
     var _format = function(num) {
       return Number(num).toFixed(2)
     }

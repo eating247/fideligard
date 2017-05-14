@@ -6,7 +6,7 @@ Fideligard.controller("PortfolioCtrl",
 
     $scope.positions = PortfolioService.getPositions();
 
-    // update stock table with new date selections
+    // update portfolio table with current date selections
     $scope.$on('change.date', function(event) {
       $scope.date = DateService.hyphenFormat();
       $scope.positions = PortfolioService.getPositions();
