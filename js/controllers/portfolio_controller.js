@@ -4,8 +4,6 @@ Fideligard.controller("PortfolioCtrl",
 
     $scope.date = DateService.stringFormat();
 
-    $scope.hello = "HELLLOOOO"
-
     $scope.positions = PortfolioService.getPositions();
 
     $scope.overview = PortfolioService.getOverview();
@@ -15,7 +13,6 @@ Fideligard.controller("PortfolioCtrl",
       $scope.date = DateService.hyphenFormat();
       $scope.positions = PortfolioService.getPositions();
       $scope.overview = PortfolioService.getOverview();
-      console.log($scope.positions)
     })
 
 }]);

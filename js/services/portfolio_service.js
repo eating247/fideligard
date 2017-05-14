@@ -21,7 +21,7 @@ Fideligard.factory("PortfolioService",
 
       // aggregate by symbol
       filtered.forEach(function(trade) {
-        var position = _findSym(trade.symbol);
+        var position = PortfolioService.findPos(trade.symbol);
         console.log(trade.symbol, position, 'position')
         if (!position) {
           //if position obj doesn't exist for trades for this symbol, create one + populate with price info relative to selected date
@@ -65,12 +65,6 @@ Fideligard.factory("PortfolioService",
       })
     }
 
-    var _findSym = function(sym) {
-      return _positions.find(function(position) {
-        return position.symbol === sym;
-      })
-    }
-
     var _getOverview = function() {
       _overview = {
         costBasis: 0,
@@ -80,6 +74,12 @@ Fideligard.factory("PortfolioService",
       _positions.forEach(function(position) {
         _overview.costBasis += position.costBasis;
         _overview.currentVal += position.currentVal;
+      })
+    }
+
+    PortfolioService.findPos = function(sym) {
+      return _positions.find(function(position) {
+        return position.symbol === sym;
       })
     }
 

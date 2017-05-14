@@ -12,47 +12,51 @@
 
 <h4 ng-hide="{{positions.length}}" class="text-center">You haven't made any trades yet!</h4>
 
-<div ng-show="{{positions.length}}" class="table-responsive">
-  <table class="table table-striped">
-    <tr>
-      <th>Cost Basis</th>
-      <th>Current Value</th>
-      <th>Profit/Loss</th>
-    </tr>
-    <tr>
-      <td>{{ overview.costBasis.toFixed(2) }}</td>
-      <td>{{ overview.currentVal.toFixed(2) }}</td>
-      <td>{{ overview.costBasis - overview.currentVal }}</td>
-    </tr>
-  </table>
+<div ng-show="{{positions.length}}">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <tr>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+      </tr>
+      <tr>
+        <td>{{ overview.costBasis.toFixed(2) }}</td>
+        <td>{{ overview.currentVal.toFixed(2) }}</td>
+        <td>{{ (overview.costBasis - overview.currentVal).toFixed(2) }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <tr>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+        <th>Current Price</th>
+        <th>1D</th>
+        <th>7D</th>
+        <th>30D</th>
+        <th>Trade</th>
+      </tr>
+      <tr ng-repeat="position in positions">
+        <td>{{position.symbol}}</td>
+        <td>{{position.quantity}}</td>
+        <td>{{position.costBasis.toFixed(2)}}</td>
+        <td>{{position.currentVal.toFixed(2)}}</td>
+        <td>{{(position.currentVal - position.costBasis).toFixed(2)}}</td>
+        <td>{{position.current}}</td>
+        <td>{{position.one}}</td>
+        <td>{{position.seven}}</td>
+        <td>{{position.thirty}}</td>
+        <td><a ui-sref="stocks.trade({ symbol: position.symbol, price: {{position.current}}, date: date })">Trade</a></td>
+      </tr>
+    </table>  
+  </div>  
 </div>
 
-<div ng-show="{{positions.length}}" class="table-responsive">
-  <table class="table table-striped">
-    <tr>
-      <th>Symbol</th>
-      <th>Quantity</th>
-      <th>Cost Basis</th>
-      <th>Current Value</th>
-      <th>Profit/Loss</th>
-      <th>Current Price</th>
-      <th>1D</th>
-      <th>7D</th>
-      <th>30D</th>
-      <th>Trade</th>
-    </tr>
-    <tr ng-repeat="position in positions">
-      <td>{{position.symbol}}</td>
-      <td>{{position.quantity}}</td>
-      <td>{{position.costBasis.toFixed(2)}}</td>
-      <td>{{position.currentVal.toFixed(2)}}</td>
-      <td>{{(position.currentVal - position.costBasis).toFixed(2)}}</td>
-      <td>{{position.current}}</td>
-      <td>{{position.one}}</td>
-      <td>{{position.seven}}</td>
-      <td>{{position.thirty}}</td>
-      <td><a ui-sref="stocks.trade({ symbol: position.symbol, price: {{position.current}}, date: date })">Trade</a></td>
-    </tr>
-  </table>  
-</div>
+
 

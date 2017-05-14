@@ -1,6 +1,6 @@
 Fideligard.controller("TradeCtrl", 
-  ["$scope", "$stateParams", "StockService", "TradeService", "$state",
-  function($scope, $stateParams, StockService, TradeService, $state) {
+  ["$scope", "$stateParams", "StockService", "TradeService", "$state", "PortfolioService",
+  function($scope, $stateParams, StockService, TradeService, $state, PortfolioService) {
 
     var _stocks = StockService.formatStockData();
 
@@ -20,9 +20,16 @@ Fideligard.controller("TradeCtrl",
     }
 
     $scope.orderStatus = function() {
-      // cost is less than cash on hand
-      // TO DO: can't sell stocks not in portfolio
-      return $scope.cost() < $scope.cash ? true : false;
+      if ($scope.newTrade.type) {
+        // if buying, make sure cash can cover trade
+        return $scope.cost() < $scope.cash ? true : false;
+      } else {
+        // if selling, cannot sell more quantity than they own
+        var position = PortfolioService.findPos($scope.newTrade.symbol)
+        console.log(position)
+        return position && (position.quantity > $scope.newTrade.quantity) ? true: false; 
+      }
+      
     }
 
     $scope.submitTrade = function() {
