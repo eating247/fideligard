@@ -16,10 +16,10 @@ Fideligard.factory("PortfolioService",
     var _overview = []; // data for upper table
 
     var _getPositions = function() {
-      console.log('filtering', _trades.length, 'trades')
+      // console.log('filtering', _trades.length, 'trades')
       // filter _trades for those <= _date
+      _positions = [];
       var filtered = _filterBeforeDate();
-      console.log('trades <= current date:', filtered)
 
       // aggregate by symbol
       filtered.forEach(function(trade) {
@@ -28,7 +28,7 @@ Fideligard.factory("PortfolioService",
         if (!position) {
           //if position obj doesn't exist for trades for this symbol, create one + populate with price info relative to selected date
           console.log('creating position for ', trade.symbol)
-          var currentPrices = _findPrices(trade.symbol)[0];
+          var currentPrices = _findPrices(trade.symbol);
           console.log('prices ', currentPrices)
           _positions.push(
                 position = {
@@ -41,16 +41,15 @@ Fideligard.factory("PortfolioService",
                 one: currentPrices.one,
                 seven: currentPrices.seven,
                 thirty: currentPrices.thirty
-          });
+          })
+        }
         // collect trade info: quantity, cost basis, current value, profit/loss (based on buy/sell)
         var type = trade.type ? 1 : -1;
         position.quantity += type * trade.quantity;
         position.costBasis += type * trade.quantity * trade.price;
         position.currentVal += trade.quantity * trade.price;
-        }
-
+        console.log(position)
       })
-      console.log(_positions);
     }
 
     var _filterBeforeDate = function() {
@@ -60,18 +59,18 @@ Fideligard.factory("PortfolioService",
           return trade.date <= _date();
         })
       )
+      console.log('trades <= current date:', filtered)
       return [].concat.apply([], filtered);
     }
 
     var _findPrices = function(sym) {
-      console.log(StockService.formatStockData())
       return StockService.formatStockData().filter( function(stock) {
         return stock.symbol === sym
       })
     }
 
     var _findSym = function(sym) {
-      _positions.find(function(position) {
+      return _positions.find(function(position) {
         return position.symbol === sym;
       })
     }
