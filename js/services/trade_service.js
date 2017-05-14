@@ -7,7 +7,6 @@ Fideligard.factory("TradeService", ["_",
     var _cash = 1000000; // initial amount to play with
 
     TradeService.save = function(newTrade) {
-      console.log(newTrade)
       _trades.push(newTrade);
       _registerTrade(newTrade);
     }
@@ -25,7 +24,6 @@ Fideligard.factory("TradeService", ["_",
     }
 
     TradeService.getTrades = function() {
-      console.log(_trades);
       return _trades;
     }
 

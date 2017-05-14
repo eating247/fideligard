@@ -7,7 +7,7 @@ Fideligard.factory("PortfolioService",
       return DateService.hyphenFormat();
     }
 
-    var _seeded = [{date: "2016-06-21", price: "695.94", symbol: "GOOG", quantity: 10, type: true}, {date: "2016-06-21", price: "695.94", symbol: "GOOG", quantity: 10, type: true}, {date: "2016-06-21", price: "695.94", symbol: "GOOG", quantity: 10, type: true}]
+    // var _seeded = [{date: "2016-06-21", price: "695.94", symbol: "GOOG", quantity: 10, type: true}, {date: "2016-06-21", price: "695.94", symbol: "GOOG", quantity: 10, type: true}, {date: "2016-06-21", price: "695.94", symbol: "GOOG", quantity: 10, type: true}]
 
     var _trades = TradeService.getTrades();
 
@@ -19,12 +19,38 @@ Fideligard.factory("PortfolioService",
       console.log('filtering', _trades.length, 'trades')
       // filter _trades for those <= _date
       var filtered = _filterBeforeDate();
-      console.log('trades <= current date', filtered.length)
+      console.log('trades <= current date:', filtered)
 
-      // filter _trades for those <= _date
       // aggregate by symbol
-      // collect stock info: current, one, seven, thirty day prices
-      // collect trade info: quantity, cost basis, current value, profit/loss (based on type, buy/sell)
+      filtered.forEach(function(trade) {
+        var position = _findSym(trade.symbol);
+        console.log(trade.symbol, position, 'position')
+        if (!position) {
+          //if position obj doesn't exist for trades for this symbol, create one + populate with price info relative to selected date
+          console.log('creating position for ', trade.symbol)
+          var currentPrices = _findPrices(trade.symbol)[0];
+          console.log('prices ', currentPrices)
+          _positions.push(
+                position = {
+                symbol: trade.symbol,
+                quantity: 0,
+                costBasis: 0,
+                currentVal: 0,
+                // collect stock info: current, one, seven, thirty day prices
+                current: currentPrices.price,
+                one: currentPrices.one,
+                seven: currentPrices.seven,
+                thirty: currentPrices.thirty
+          });
+        // collect trade info: quantity, cost basis, current value, profit/loss (based on buy/sell)
+        var type = trade.type ? 1 : -1;
+        position.quantity += type * trade.quantity;
+        position.costBasis += type * trade.quantity * trade.price;
+        position.currentVal += trade.quantity * trade.price;
+        }
+
+      })
+      console.log(_positions);
     }
 
     var _filterBeforeDate = function() {
@@ -37,9 +63,22 @@ Fideligard.factory("PortfolioService",
       return [].concat.apply([], filtered);
     }
 
+    var _findPrices = function(sym) {
+      console.log(StockService.formatStockData())
+      return StockService.formatStockData().filter( function(stock) {
+        return stock.symbol === sym
+      })
+    }
+
+    var _findSym = function(sym) {
+      _positions.find(function(position) {
+        return position.symbol === sym;
+      })
+    }
 
     PortfolioService.getPositions = function() {
       _getPositions();
+      console.log(_positions)
       return _positions;
     }
 

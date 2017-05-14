@@ -9,6 +9,9 @@
 </div>
 
 <h5 class="text-muted"> as of {{date}}</h5>
+<h1>{{positions}}</h1>
+<h1>{{positions.length}}</h1>
+<h1>{{hello}}</h1>
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -38,11 +41,11 @@
       <th>Trade?</th>
     </tr>
     <tr ng-repeat="position in positions">
-      <td>{{position.symbol}}</td>
+      <td>symbol here</td>
       <td>{{position.quantity}}</td>
       <td>{{position.costBasis}}</td>
       <td>{{position.currentVal}}</td>
-      <td>{{position.profitLoss}}</td>
+      <td>{{position.currentVal - position.costBasis}}</td>
       <td>{{position.current}}</td>
       <td>{{position.one}}</td>
       <td>{{position.seven}}</td>
