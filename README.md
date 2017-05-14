@@ -4,7 +4,7 @@ An AngularJS single-page web application using UI-Router multi-view states, NoSQ
 
 To fire on local server, `git clone` the repository and run `ruby -run -e httpd . -p 3000`.
 
-![Load](https://github.com/eating247/fideligard/blob/master/screenshots/1.png)
+![Welcome](https://github.com/eating247/fideligard/blob/master/screenshots/1.png)
 
 ## Features
 

@@ -1,6 +1,6 @@
 <td>{{stock.symbol}}</td>
 <td>{{stock.price | currency}}</td>
-<td>{{stock.one}}</td>
-<td>{{stock.seven}}</td>
-<td>{{stock.thirty}}</td>
+<td>{{stock.one | currency}}</td>
+<td>{{stock.seven | currency}}</td>
+<td>{{stock.thirty | currency}}</td>
 <td><a ui-sref="stocks.trade({ symbol: stock.symbol, price: {{stock.price}}, date: date })">Trade</a></td>

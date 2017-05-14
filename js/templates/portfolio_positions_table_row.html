@@ -1,10 +1,10 @@
 <td>{{position.symbol}}</td>
 <td>{{position.quantity}}</td>
-<td>{{position.costBasis.toFixed(2)}}</td>
-<td>{{position.currentVal.toFixed(2)}}</td>
-<td>{{(position.currentVal - position.costBasis).toFixed(2)}}</td>
-<td>{{position.current}}</td>
-<td>{{position.one}}</td>
-<td>{{position.seven}}</td>
-<td>{{position.thirty}}</td>
+<td>{{position.costBasis | currency }}</td>
+<td>{{position.currentVal | currency }}</td>
+<td>{{(position.currentVal - position.costBasis) | currency }}</td>
+<td>{{position.current | currency}}</td>
+<td>{{position.one | currency}}</td>
+<td>{{position.seven | currency}}</td>
+<td>{{position.thirty | currency}}</td>
 <td><a ui-sref="stocks.trade({ symbol: position.symbol, price: {{position.current}}, date: date })">Trade</a></td>

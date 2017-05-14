@@ -15,7 +15,9 @@ Fideligard.factory("PortfolioService",
 
     var _getPositions = function() {
       _positions = [];
+      console.log(_trades)
       var filtered = _filterBeforeDate();
+      console.log(filtered)
 
       // aggregate by symbol
       filtered.forEach(function(trade) {
@@ -50,6 +52,8 @@ Fideligard.factory("PortfolioService",
       var filtered = [];
       filtered.push(
         _trades.filter( function(trade) {
+          console.log(trade.date, _date())
+          console.log(trade.date <= _date())
           return trade.date <= _date();
         })
       )

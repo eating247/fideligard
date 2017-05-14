@@ -15,9 +15,9 @@
         <th>Profit/Loss</th>
       </tr>
       <tr>
-        <td>{{ overview.costBasis.toFixed(2) }}</td>
-        <td>{{ overview.currentVal.toFixed(2) }}</td>
-        <td>{{ (overview.costBasis - overview.currentVal).toFixed(2) }}</td>
+        <td>{{ overview.costBasis | currency }}</td>
+        <td>{{ overview.currentVal | currency }}</td>
+        <td>{{ (overview.costBasis - overview.currentVal) | currency }}</td>
       </tr>
     </table>
   </div>
@@ -38,7 +38,9 @@
       </tr>
       <tr portfolio-positions-table-row ng-repeat="position in positions" position="position" date="date">
       </tr>
-    </table>  
+    </table> 
+    <small class="text-muted">*1D, 7D, and 30D columns refer to respective price changes from one, seven, and thirty calendar days before the selected date.</small>  
+    <small class="text-muted">*Amounts in parentheses indicate negative balances or changes in price. </small>  
   </div>  
 </div>
 

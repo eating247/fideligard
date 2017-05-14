@@ -106,10 +106,10 @@ Fideligard.factory("StockService",
         var obj = stocksAtDate[sym];
         displayedData.push({
           symbol: sym,
-          price: _format(obj),
-          one: _format(obj - oneDayAgo[sym]),
-          seven: _format(obj - sevenDaysAgo[sym]),
-          thirty: _format(obj - thirtyDaysAgo[sym])
+          price: obj,
+          one: obj - oneDayAgo[sym],
+          seven: obj - sevenDaysAgo[sym],
+          thirty: obj - thirtyDaysAgo[sym]
         })
       })
       return displayedData;

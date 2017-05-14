@@ -25,6 +25,7 @@ Fideligard.factory("DateService", ["_",
 
     // processes date input from slider form
     DateService.setDateValue = function(value) {
+      console.log('setting date value ', value)
       _date = new Date(2016, 5, value)
       return _date;
     }
