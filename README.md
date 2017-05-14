@@ -1,4 +1,4 @@
-# assignment_fideligard_spa
+# fideligard
 
 An AngularJS JavaScript single-page web application using services, directives, ui-router, and modular code to create a historical stock portfolio simulator with trading data via the Yahoo Finance API.
 
