@@ -1,10 +1,12 @@
 <div portfolio-header>Portfolio</div>
 
-<h5 class="text-muted"> as of {{date}}</h5>
-
 <div welcome ng-hide="{{positions.length}}"></div>
 
 <div ng-show="{{positions.length}}">
+  <div class="clearfix">
+    <h5 class="text-muted pull-right"> as of {{date}}</h5>
+  </div>
+
   <div class="table-responsive">
     <table class="table table-striped">
       <tr>
