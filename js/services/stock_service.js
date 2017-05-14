@@ -3,7 +3,7 @@ Fideligard.factory("StockService",
   function(_, DateService, $http, $q) {
     var StockService = {};
 
-    var _stockSymbols = ['GOOG', 'MSFT', 'TSLA', 'VTI', 'AAPL'];
+    var _stockSymbols = ['GOOG', 'MSFT', 'TSLA', 'VTI', 'AAPL', 'PG', 'YHOO', 'FB', 'WMT', 'SSNLF', 'BP', 'GM', 'HP', 'VZ', 'T', 'COST'];
 
     var _stocks = [];
 

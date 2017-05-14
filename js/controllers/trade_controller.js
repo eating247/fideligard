@@ -26,8 +26,7 @@ Fideligard.controller("TradeCtrl",
       } else {
         // if selling, cannot sell more quantity than they own
         var position = PortfolioService.findPos($scope.newTrade.symbol)
-        console.log(position)
-        return position && (position.quantity > $scope.newTrade.quantity) ? true: false; 
+        return position && (position.quantity >= $scope.newTrade.quantity) ? true: false; 
       }
       
     }

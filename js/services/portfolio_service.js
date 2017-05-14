@@ -14,8 +14,6 @@ Fideligard.factory("PortfolioService",
     var _overview; // data for upper table
 
     var _getPositions = function() {
-      // console.log('filtering', _trades.length, 'trades')
-      // filter _trades for those <= _date
       _positions = [];
       var filtered = _filterBeforeDate();
 
@@ -55,7 +53,6 @@ Fideligard.factory("PortfolioService",
           return trade.date <= _date();
         })
       )
-      console.log('trades <= current date:', filtered)
       return [].concat.apply([], filtered);
     }
 
