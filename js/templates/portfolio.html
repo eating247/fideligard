@@ -41,9 +41,9 @@
     <tr ng-repeat="position in positions">
       <td>{{position.symbol}}</td>
       <td>{{position.quantity}}</td>
-      <td>{{position.costBasis}}</td>
-      <td>{{position.currentVal}}</td>
-      <td>{{position.currentVal - position.costBasis}}</td>
+      <td>{{position.costBasis.toFixed(2)}}</td>
+      <td>{{position.currentVal.toFixed(2)}}</td>
+      <td>{{(position.currentVal - position.costBasis).toFixed(2)}}</td>
       <td>{{position.current}}</td>
       <td>{{position.one}}</td>
       <td>{{position.seven}}</td>

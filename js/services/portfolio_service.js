@@ -35,7 +35,7 @@ Fideligard.factory("PortfolioService",
                 quantity: 0,
                 costBasis: 0,
                 currentVal: 0,
-                // collect stock info: current, one, seven, thirty day prices
+                // price info relative to current date
                 current: currentPrices.price,
                 one: currentPrices.one,
                 seven: currentPrices.seven,
@@ -46,8 +46,7 @@ Fideligard.factory("PortfolioService",
         var type = trade.type ? 1 : -1;
         position.quantity += type * trade.quantity;
         position.costBasis += type * trade.quantity * trade.price;
-        position.currentVal += trade.quantity * trade.price;
-        console.log(position)
+        position.currentVal += position.quantity * position.current;
       })
     }
 
@@ -76,7 +75,6 @@ Fideligard.factory("PortfolioService",
 
     PortfolioService.getPositions = function() {
       _getPositions();
-      console.log(_positions)
       return _positions;
     }
 
