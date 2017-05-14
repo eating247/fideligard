@@ -32,7 +32,7 @@ Fideligard.config(["$stateProvider", "$urlRouterProvider",
       params: { // default params
         date: '2016-08-29',
         symbol: "AAPL",
-        price: '106.82.79'
+        price: '106.82'
       },
       views: {
         "portfolio@": {

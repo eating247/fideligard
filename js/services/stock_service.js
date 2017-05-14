@@ -115,11 +115,5 @@ Fideligard.factory("StockService",
       return displayedData;
     }
 
-    // round to two dec
-    // TO DO: more formatting...currency format? add + for increases
-    var _format = function(num) {
-      return Number(num).toFixed(2)
-    }
-
     return StockService;
   }])

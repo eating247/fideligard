@@ -21,14 +21,13 @@ Fideligard.controller("TradeCtrl",
 
     $scope.orderStatus = function() {
       if ($scope.newTrade.type) {
-        // if buying, make sure cash can cover trade
+        // if buying: make sure cash can cover trade
         return $scope.cost() < $scope.cash ? true : false;
       } else {
-        // if selling, cannot sell more quantity than they own
+        // if selling: cannot sell more quantity than they own
         var position = PortfolioService.findPos($scope.newTrade.symbol)
         return position && (position.quantity >= $scope.newTrade.quantity) ? true: false; 
-      }
-      
+      } 
     }
 
     $scope.submitTrade = function() {
