@@ -1,6 +1,6 @@
 # fideligard
 
-An AngularJS JavaScript single-page web application using services, directives, ui-router, and modular code to create a historical stock portfolio simulator with trading data via the Yahoo Finance API.
+An AngularJS single-page web application using UI-Router multi-view states, NoSQL data modeling, and modular code to create a historical stock portfolio simulator with trading data via the Yahoo Finance API.
 
 To fire on local server, `git clone` the repository and run `ruby -run -e httpd . -p 3000`.
 
@@ -12,6 +12,7 @@ To fire on local server, `git clone` the repository and run `ruby -run -e httpd 
 
 - Users are prompted to begin trading after trading data loads for the specified time interval.
 - Via the stocks panel, users can access the trade form, where fields are auto-populated with relevant stock information for the selected date on the slider form. 
+- Submission disabled unless order status is validated.
 
 ![Trade](https://github.com/eating247/fideligard/blob/master/screenshots/2.png)
 
