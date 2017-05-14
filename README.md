@@ -2,7 +2,7 @@
 
 An AngularJS JavaScript single-page web application using services, directives, ui-router, and modular code to create a historical stock portfolio simulator with trading data via the Yahoo Finance API.
 
-To fire on local server, `ruby -run -e httpd . -p 3000`
+To fire on local server, `git clone` the repository and run `ruby -run -e httpd . -p 3000`.
 
 ![Load](https://github.com/eating247/assignment_fideligard_spa/blob/master/1.png)
 
