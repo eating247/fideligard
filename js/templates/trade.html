@@ -6,14 +6,13 @@
         <form name="tradeForm">
           <table class="table">
             <tr>
-              <td>Symbol</td>
+              <td><label>Symbol</label></td>
               <td>
-                <!-- <input class="form-control" type="text" ng-model="newTrade.symbol"> -->
                 {{newTrade.symbol}}
               </td>
             </tr>
             <tr>
-              <td>Buy/Sell</td>
+              <td><label>Buy/Sell</label></td>
               <td>
                 <select class="form-control" 
                         ng-model="newTrade.type"
@@ -22,22 +21,21 @@
               </td>
             </tr>
             <tr>
-              <td>Quantity</td>
+              <td><label>Quantity</label></td>
               <td><input class="form-control" type="number" ng-model="newTrade.quantity"></td>
             </tr>
             <tr>
-              <td>Date</td>
+              <td><label>Date</label></td>
               <td>
-                <!-- <input class="form-control" disabled type="date" ng-model="newTrade.date" ng-value="{{newTrade.date}}"> -->
                 {{newTrade.date}}
               </td>
             </tr>
             <tr>
-              <td>Price</td>
+              <td><label>Price</label></td>
               <td>{{newTrade.price | currency}}</td>
             </tr>
             <tr>
-              <td>Cost</td>
+              <td><label>Cost</label></td>
               <td>{{cost() | currency}}</td>
             </tr>
           </table>
@@ -47,9 +45,9 @@
   </div>
 
   <div class="col-sm-4">
-    <h4>Cash Available:</h4>
+    <h4><label>Cash Available:</label></h4>
     <p>{{cash | currency}}</p>
-    <h4>Order Status</h4>
-    <h5 class="{{orderStatus() ? 'text-success' : 'text-danger'}}">{{orderStatus() ? 'VALID' : 'INVALID'}}</h5>
+    <h4><label>Order Status</label></h4>
+    <h5 class="{{orderStatus() ? 'text-success' : 'text-danger'}}"><strong>{{orderStatus() ? 'VALID' : 'INVALID'}}</strong></h5>
   </div>
 </div>
