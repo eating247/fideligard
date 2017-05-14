@@ -4,20 +4,21 @@ An AngularJS JavaScript single-page web application using services, directives, 
 
 To fire on local server, `git clone` the repository and run `ruby -run -e httpd . -p 3000`.
 
-![Load](https://github.com/eating247/assignment_fideligard_spa/blob/master/1.png)
+![Load](https://github.com/eating247/fideligard/blob/master/screenshots/1.png)
 
 ## Features
 
 ### User Flow
 
 - Users are prompted to begin trading after trading data loads for the specified time interval.
-
-![Trade](https://github.com/eating247/assignment_fideligard_spa/blob/master/2.png)
-
 - Via the stocks panel, users can access the trade form, where fields are auto-populated with relevant stock information for the selected date on the slider form. 
 
-![Transactions](https://github.com/eating247/assignment_fideligard_spa/blob/master/3.png)
+![Trade](https://github.com/eating247/fideligard/blob/master/screenshots/2.png)
 
 - All trades can be sorted according to date, price, ticker, or type (buy/sell).
 
-![Portfolio](https://github.com/eating247/assignment_fideligard_spa/blob/master/4.png)
+![Transactions](https://github.com/eating247/fideligard/blob/master/screenshots/3.png)
+
+- User's portfolio updates according to position in time, as selected through date slider.
+
+![Portfolio](https://github.com/eating247/fideligard/blob/master/screenshots/4.png)
