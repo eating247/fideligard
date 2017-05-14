@@ -36,17 +36,7 @@
         <th>30D</th>
         <th>Trade</th>
       </tr>
-      <tr ng-repeat="position in positions">
-        <td>{{position.symbol}}</td>
-        <td>{{position.quantity}}</td>
-        <td>{{position.costBasis.toFixed(2)}}</td>
-        <td>{{position.currentVal.toFixed(2)}}</td>
-        <td>{{(position.currentVal - position.costBasis).toFixed(2)}}</td>
-        <td>{{position.current}}</td>
-        <td>{{position.one}}</td>
-        <td>{{position.seven}}</td>
-        <td>{{position.thirty}}</td>
-        <td><a ui-sref="stocks.trade({ symbol: position.symbol, price: {{position.current}}, date: date })">Trade</a></td>
+      <tr portfolio-positions-table-row ng-repeat="position in positions" position="position" date="date">
       </tr>
     </table>  
   </div>  
