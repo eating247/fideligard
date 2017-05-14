@@ -4,9 +4,16 @@
       <ng-transclude></ng-transclude>
     </h2>
   </div>
-  <div class="col-sm-4">        
-    <a ui-sref="stocks">Portfolio</a>
-    <a ui-sref="stocks.trade">Trade</a>
-    <a ui-sref="stocks.transactions">Transactions</a>
+
+  <div class="col-sm-4 bottom">
+    <button type="button" class="btn btn-info btn-xs">
+      <a ui-sref="stocks.trade">Trade</a>
+    </button>
+    <button type="button" class="btn btn-info btn-xs">
+      <a ui-sref="stocks.transactions">Transactions</a>
+    </button>
+    <button type="button" class="btn btn-info btn-xs">
+      <a ui-sref="stocks">Portfolio</a>
+    </button> 
   </div>
 </div>
