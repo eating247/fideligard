@@ -51,7 +51,7 @@
       <td>{{position.one}}</td>
       <td>{{position.seven}}</td>
       <td>{{position.thirty}}</td>
-      <td><a ui-sref="stocks.trade">Trade</a></td>
+      <td><a ui-sref="stocks.trade({ symbol: position.symbol, price: {{position.current}}, date: date })">Trade</a></td>
     </tr>
   </table>  
 </div>
