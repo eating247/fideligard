@@ -1,6 +1,6 @@
 Fideligard.controller("StocksCtrl", 
-  ["$scope", "DateService", "StockService", "stockData",
-  function($scope, DateService, StockService, stockData) {
+  ["$scope", "DateService", "StockService", "stockData", "$state",
+  function($scope, DateService, StockService, stockData, $state) {
 
     $scope.displayDate = DateService.stringFormat();
 

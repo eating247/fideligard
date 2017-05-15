@@ -4,7 +4,6 @@ Fideligard.factory("DateService", ["_",
 
     var _value = 90;
 
-    // !! TO DO: cannot get date to initialize to edt value instead of est value
     var _date = new Date(2016, 5, _value); // initialized form value
 
     DateService.date = function() {
@@ -19,8 +18,6 @@ Fideligard.factory("DateService", ["_",
 
     // Jan 1, 2017 format
     DateService.stringFormat = function() {
-      console.log(_value, _date)
-      console.log(DateService.hyphenFormat())
       var date = _date.toDateString();
       date = date.slice(4, 10) + ',' + date.slice(10)
       return date; 

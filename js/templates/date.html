@@ -1,6 +1,9 @@
-<h5 class="text-center">
-  {{displayDate()}} 
-</h5 class="text-center">
+
+  <div ng-show="dateValue"><h5>{{ displayDate() }}</h5></div>
+  <div ng-hide="dateValue">
+    <h5>The slider below represents the interval between June 1st and November 27th, 2016.</h5>
+    <h4>Click anywhere to select a date!</h4>
+  </div>
 
 <!-- set new date by clicking or hitting return -->
 <form name="dateForm"  
