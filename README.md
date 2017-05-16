@@ -10,16 +10,16 @@ To fire on local server, `git clone` the repository and run `ruby -run -e httpd 
 
 ### User Flow
 
-- Users are prompted to begin trading after trading data loads for the specified time interval.
-- Via the stocks panel, users can access the trade form, where fields are auto-populated with relevant stock information for the selected date on the slider form. 
-- Submission disabled unless order status is validated.
+- Users are prompted to begin trading after stock data loads.
+- Via the stocks panel, users enter trades through the trade form, where fields are auto-populated with respective stock and date info. 
+- Submission disabled if user attempts to buy more stocks than their available cash, or sell more quantity than they own.
 
 ![Trade](https://github.com/eating247/fideligard/blob/master/screenshots/2.png)
 
-- All trades can be sorted according to date, price, ticker, or type (buy/sell).
+- All transactions up to selected date can be sorted according to date, price, ticker, or type (buy/sell).
 
 ![Transactions](https://github.com/eating247/fideligard/blob/master/screenshots/3.png)
 
-- User's portfolio updates according to position in time, as selected through date slider.
+- User's portfolio updates according to selected date, as adjusted through the date slider.
 
 ![Portfolio](https://github.com/eating247/fideligard/blob/master/screenshots/4.png)
