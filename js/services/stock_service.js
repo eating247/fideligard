@@ -3,7 +3,9 @@ Fideligard.factory("StockService",
   function(_, DateService, $http, $q) {
     var StockService = {};
 
-    var _stockSymbols = ['GOOG', 'MSFT', 'TSLA', 'VTI', 'AAPL', 'PG', 'YHOO', 'FB', 'WMT', 'SSNLF', 'BP', 'GM', 'HP', 'VZ', 'T', 'COST'];
+    // var _stockSymbols = ['GOOG', 'MSFT', 'TSLA', 'VTI', 'AAPL', 'PG', 'YHOO', 'FB', 'WMT', 'SSNLF', 'BP', 'GM', 'HP', 'VZ', 'T', 'COST'];
+
+    var _stockSymbols = ['MSFT'];
 
     var _stocks = [];
 
@@ -11,14 +13,14 @@ Fideligard.factory("StockService",
 
     var _query = function(stockSymbol) {
       var query =  
-        'http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22' + 
-        stockSymbol + 
-        // date input range
-        '%20%22and%20startDate%20=%20' + 
-        '"2016-06-01"' + 
-        '%20and%20endDate%20=%20' + 
-        '"2016-11-27"' + 
-        '%20&format=json&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=';
+        "https://www.quandl.com/api/v3/datasets/WIKI/" 
+        // symbol
+        + stockSymbol + ".json?"
+        // start date
+        + "start_date=2016-06-01&"
+        // end date
+        + "end_date=2017-01-01"
+        + "&&column_index=4&transformation=rdiff"
       return query;
     }
 
@@ -31,87 +33,70 @@ Fideligard.factory("StockService",
 
     // return stock info for entire interval in date form
     StockService.all = function() {
-      var requests = [];
-      for(var i = 0; i < _stockSymbols.length; i++) {
-        requests.push(_getStock(_stockSymbols[i]))
-      }
+      // var requests = [];
+      // for(var i = 0; i < _stockSymbols.length; i++) {
+      //   requests.push(_getStock(_stockSymbols[i]))
+      // }
 
-      return $q.all(requests)
-               .then(function(response) {
-                  for(var i = 0; i < response.length; i++) {
-                    _stocks.push(response[i].data.query.results.quote);
-                  }
-                  _processData(_stocks)
-                  return _stockData;
-               }, function(response) {
-                console.error(response);
-               })
+      // return $q.all(requests)
+      //          .then(function(response) {
+      //             console.table(response)
+      //             for(var i = 0; i < response.length; i++) {
+      //               _stocks.push(response[i].dataset.data);
+      //             };
+      //             _processData(_stocks)
+      //             return _stockData;
+      //          }, function(response) {
+      //           console.error(response);
+      //          })
+      _stocks.push(response)
+      _processData(_stocks)
     }
 
     // organize stock info by date + symbol
     var _processData = function(stocks) {
-      for (var j = 1; j <= 180; j++) {
-        var date = DateService.setHyphenDateValue(j);
-        var entry = _stockData[date] = {};
-        var stocksByDate = _filterDate(date);
-        // if no stock data for current date, retrieves stock info for previous date
-        var counter = 1;
-        while (!stocksByDate.length) {
-          var date = DateService.setHyphenDateValue(j - counter);
-          var stocksByDate = _filterDate(date);
-          counter++;
+      _stocks.forEach(function(stock) {
+        var sym = stock.dataset.dataset_code;
+        var data = stock.dataset.data;
+        _stockData[sym] = {};
+        for(var i = 0; i < data.length; i++) {
+          var date = data[i][0];
+          var price = data[i][1];
+          _stockData[sym][date] = price;
         }
-        for (var k = 0; k < stocksByDate.length; k++) {
-          entry[stocksByDate[k].Symbol.replace(/%20/g, "")] = stocksByDate[k].Close;
-        }
-      }
 
-      // fill in holes for data
-      for (var j = 1; j <= 180; j++) {
-        var date = DateService.setHyphenDateValue(j);
-        var entry = _stockData[date];
-        var stocksByDate = _filterDate(date);
-        // if no data found for a specific date, substitute with data from day before
-        if (!stocksByDate.length) {
-          var dateBefore = DateService.setHyphenDateValue(j - 1);
-          var entryBefore = _stockData[dateBefore];
-          var entry = $.extend({}, entryBefore);
+        console.log("HELLOOOOOO")
+        // for missing dates, use closing price from day before
+        for(var i = 1; i < 180; i++) {
+          var date = DateService.setHyphenDateValue(i);
+          if(!_stockData[sym][date]) {
+            var dateBefore = DateService.setHyphenDateValue(i - 1);
+            _stockData[sym][date] = _stockData[sym][dateBefore];
+          }
         }
-      }
-      return _stockData;
-    }
-
-    // return all stock data for specified date
-    var _filterDate = function(date) {
-      var filtered = [];
-      _stocks.forEach( function(stock) {
-        filtered.push(
-          stock.filter( function(obj) {
-            return obj.Date === date;
-          })
-        )
-      })
-      return [].concat.apply([], filtered);
+      });
     }
 
     StockService.formatStockData = function() {
       var date = DateService.hyphenFormat();
-      var stocksAtDate = _stockData[date];
-      var oneDayAgo = _stockData[DateService.nDaysAgo(1)];
-      var sevenDaysAgo = _stockData[DateService.nDaysAgo(7)];
-      var thirtyDaysAgo = _stockData[DateService.nDaysAgo(30)];
+      var oneDayBefore = DateService.nDaysAgo(1);
+      var sevenDaysBefore = DateService.nDaysAgo(7);
+      var thirtyDaysBefore = DateService.nDaysAgo(30)
+      // contains objects holding data for each row in stock panel
+      var displayedData = []; 
 
-      var displayedData = [];
-      Object.keys(stocksAtDate).forEach(function(sym) {
-        var obj = stocksAtDate[sym];
+      _stockSymbols.forEach(function(sym) {
+        var price = _stockData[sym][date]
         displayedData.push({
           symbol: sym,
-          price: obj,
-          one: obj - oneDayAgo[sym],
-          seven: obj - sevenDaysAgo[sym],
-          thirty: obj - thirtyDaysAgo[sym]
+          price: price,
+          one: price - _stockData[sym][oneDayBefore],
+          seven: price - _stockData[sym][sevenDaysBefore],
+          thirty: price - _stockData[sym][thirtyDaysBefore]
         })
       })
+
+      console.table(displayedData)
       return displayedData;
     }
 
