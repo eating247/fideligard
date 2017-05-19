@@ -31,34 +31,29 @@ Fideligard.factory("StockService",
 
     // return stock info for entire interval in date form
     StockService.all = function() {
-      // var requests = [];
-      // for(var i = 0; i < _stockSymbols.length; i++) {
-      //   requests.push(_getStock(_stockSymbols[i]))
-      // }
+      var requests = [];
+      for(var i = 0; i < _stockSymbols.length; i++) {
+        requests.push(_getStock(_stockSymbols[i]))
+      }
 
-      // return $q.all(requests)
-      //          .then(function(response) {
-      //             console.log("RESPONSE SUCCESSFUL")
-      //             console.table(response)
-      //             for(var i = 0; i < response.length; i++) {
-      //               _stocks.push(response[i].data);
-      //             };
-      //             _processData(_stocks)
-      //             return _stockData;
-      //          }, function(response) {
-      //           console.log("RESPONSE FAILED")
-      //           console.error(response);
-
-      //           // fallback on hardcoded data in case of 429 error
-      //           _stockSymbols = ['MSFT', 'AAPL', 'GOOG', 'TSLA', 'FB', 'T', 'PG', 'GM', 'BP', 'COST', 'WMT', 'AMZN', 'IBM'];
-      //           _stocks = responses;
-      //           _processData(_stocks);
-      //          })
+      return $q.all(requests)
+               .then(function(response) {
+                  console.log("RESPONSE SUCCESSFUL")
+                  console.table(response)
+                  for(var i = 0; i < response.length; i++) {
+                    _stocks.push(response[i].data);
+                  };
+                  _processData(_stocks)
+                  return _stockData;
+               }, function(response) {
+                console.log("RESPONSE FAILED")
+                console.error(response);
 
                 // fallback on hardcoded data in case of 429 error
                 _stockSymbols = ['MSFT', 'AAPL', 'GOOG', 'TSLA', 'FB', 'T', 'PG', 'GM', 'BP', 'COST', 'WMT', 'AMZN', 'IBM'];
                 _stocks = responses;
                 _processData(_stocks);
+               })
     }
 
     var _processData = function(stocks) {
