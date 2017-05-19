@@ -17,9 +17,9 @@ Fideligard.factory("StockService",
         // symbol
         + stockSymbol + ".json?"
         // start date
-        + "start_date=2016-06-01&"
+        + "start_date=2015-12-01&"
         // end date
-        + "end_date=2017-01-01"
+        + "end_date=2016-12-31"
         + "&&column_index=4&transformation=rdiff"
       return query;
     }
@@ -40,18 +40,22 @@ Fideligard.factory("StockService",
 
       // return $q.all(requests)
       //          .then(function(response) {
+      //             console.log("RESPONSE SUCCESSFUL")
       //             console.table(response)
       //             for(var i = 0; i < response.length; i++) {
-      //               _stocks.push(response[i]);
+      //               _stocks.push(response[i].data);
       //             };
       //             _processData(_stocks)
       //             return _stockData;
       //          }, function(response) {
+      //           console.log("RESPONSE FAILED")
       //           console.error(response);
-                // hard coded response object in case api calls fail
+      //           _stocks = response;
+      //           console.table(_stocks)
+      //           _processData(_stocks)
       //          })
-      _stocks.push(response)
-      _processData(_stocks)
+      _stocks = [response]
+      _processData(_stocks);
     }
 
     var _processData = function(stocks) {
@@ -68,13 +72,15 @@ Fideligard.factory("StockService",
         }
 
         // for missing dates, use closing price from day before
-        for(var i = 1; i < 180; i++) {
+        for(var i = 1; i < 397; i++) {
           var date = DateService.setHyphenDateValue(i);
           if(!_stockData[sym][date]) {
+            console.log('plugging data for ', date)
             var dateBefore = DateService.setHyphenDateValue(i - 1);
             _stockData[sym][date] = _stockData[sym][dateBefore];
           }
         }
+        console.log(_stockData[sym])
       });
     }
 
@@ -99,7 +105,11 @@ Fideligard.factory("StockService",
         })
       })
 
-      console.table(displayedData)
+      // console.groupBy(date, _stockData[sym][date])
+      // console.log(oneDayBefore, _stockData[sym][oneDayBefore])
+      // console.log()
+      // console.log()
+      // console.groupEnd()
       return displayedData;
     }
 
