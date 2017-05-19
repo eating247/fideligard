@@ -72,10 +72,9 @@ Fideligard.factory("StockService",
         }
 
         // for missing dates, use closing price from day before
-        for(var i = 1; i < 397; i++) {
+        for(var i = 1; i < 398; i++) {
           var date = DateService.setHyphenDateValue(i);
           if(!_stockData[sym][date]) {
-            console.log('plugging data for ', date)
             var dateBefore = DateService.setHyphenDateValue(i - 1);
             _stockData[sym][date] = _stockData[sym][dateBefore];
           }
@@ -104,12 +103,6 @@ Fideligard.factory("StockService",
           thirty: price - _stockData[sym][thirtyDaysBefore]
         })
       })
-
-      // console.groupBy(date, _stockData[sym][date])
-      // console.log(oneDayBefore, _stockData[sym][oneDayBefore])
-      // console.log()
-      // console.log()
-      // console.groupEnd()
       return displayedData;
     }
 

@@ -30,9 +30,9 @@ Fideligard.config(["$stateProvider", "$urlRouterProvider",
     .state('stocks.trade', {
       url: '/trade',
       params: { // default params
-        date: '2016-08-29',
-        symbol: "AAPL",
-        price: '106.82'
+        date: '2016-06-28',
+        symbol: "MSFT",
+        price: '49.44'
       },
       views: {
         "portfolio@": {

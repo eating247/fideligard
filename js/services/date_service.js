@@ -2,10 +2,10 @@ Fideligard.factory("DateService", ["_",
   function(_) {
     var DateService = {};
 
-    var _value = 50;
+    var _value = 180;
 
     // initialized value
-    var _date = moment('2016-05-31').add(_value, 'days').toDate(); 
+    var _date = moment('2015-12-31').add(_value, 'days').toDate(); 
 
     DateService.date = function() {
       return _date;
