@@ -36,15 +36,15 @@
     <strong>Please be patient!</strong> Data may require a few seconds to load at start.
   </div>
 
-<div class="container">
+<div class="col-sm-offset-1 col-sm-10">
   <div class="row">
 
     <!-- stocks panel -->
-    <div class="col-sm-4">
+    <div class="col-sm-5">
       <div ui-view="stocks" class="template"></div>
     </div>
 
-    <div class="col-sm-8">
+    <div class="col-sm-7">
       <!-- date slider -->
       <div ui-view="date" class="template"></div>
 
@@ -71,11 +71,13 @@
 <script type="text/javascript" src="js/services/stock_service.js"></script>
 <script type="text/javascript" src="js/services/trade_service.js"></script>
 <script type="text/javascript" src="js/services/portfolio_service.js"></script>
+
 <!-- directives -->
 <script type="text/javascript" src="js/directives/stock_table_row.js"></script>
 <script type="text/javascript" src="js/directives/portfolio_header.js"></script>
 <script type="text/javascript" src="js/directives/transaction_table_row.js"></script>
 <script type="text/javascript" src="js/directives/welcome.js"></script>
 <script type="text/javascript" src="js/directives/portfolio_positions_table_row.js"></script>
+<script type="text/javascript" src="js/directives/table_footnote.js"></script>
 </body>
 </html>

@@ -31,36 +31,40 @@ Fideligard.factory("StockService",
 
     // return stock info for entire interval in date form
     StockService.all = function() {
-      var requests = [];
-      for(var i = 0; i < _stockSymbols.length; i++) {
-        requests.push(_getStock(_stockSymbols[i]))
-      }
+      // var requests = [];
+      // for(var i = 0; i < _stockSymbols.length; i++) {
+      //   requests.push(_getStock(_stockSymbols[i]))
+      // }
 
-      return $q.all(requests)
-               .then(function(response) {
-                  console.log("RESPONSE SUCCESSFUL")
-                  console.table(response)
-                  for(var i = 0; i < response.length; i++) {
-                    _stocks.push(response[i].data);
-                  };
-                  _processData(_stocks)
-                  return _stockData;
-               }, function(response) {
-                console.log("RESPONSE FAILED")
-                console.error(response);
+      // return $q.all(requests)
+      //          .then(function(response) {
+      //             console.log("RESPONSE SUCCESSFUL")
+      //             console.table(response)
+      //             for(var i = 0; i < response.length; i++) {
+      //               _stocks.push(response[i].data);
+      //             };
+      //             _processData(_stocks)
+      //             return _stockData;
+      //          }, function(response) {
+      //           console.log("RESPONSE FAILED")
+      //           console.error(response);
+
+      //           // fallback on hardcoded data in case of 429 error
+      //           _stockSymbols = ['MSFT', 'AAPL', 'GOOG', 'TSLA', 'FB', 'T', 'PG', 'GM', 'BP', 'COST', 'WMT', 'AMZN', 'IBM'];
+      //           _stocks = responses;
+      //           _processData(_stocks);
+      //          })
 
                 // fallback on hardcoded data in case of 429 error
                 _stockSymbols = ['MSFT', 'AAPL', 'GOOG', 'TSLA', 'FB', 'T', 'PG', 'GM', 'BP', 'COST', 'WMT', 'AMZN', 'IBM'];
                 _stocks = responses;
                 _processData(_stocks);
-               })
     }
 
     var _processData = function(stocks) {
       // creating _stockData object for easier reference
       // organizes stock info by symbol + date
       _stocks.forEach(function(stock) {
-        console.log(stock.dataset.dataset_code)
         var sym = stock.dataset.dataset_code;
         var data = stock.dataset.data;
         _stockData[sym] = {};
@@ -78,7 +82,6 @@ Fideligard.factory("StockService",
             _stockData[sym][date] = _stockData[sym][dateBefore];
           }
         }
-        console.log(_stockData[sym])
       });
     }
 

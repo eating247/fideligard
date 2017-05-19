@@ -4,7 +4,7 @@ An AngularJS single-page web application using UI-Router multi-view states, NoSQ
 
 To fire on local server, `git clone` the repository and run `ruby -run -e httpd . -p 3000`.
 
-![Welcome](https://github.com/eating247/fideligard/blob/master/screenshots/1.png)
+![Welcome]()
 
 ## Features
 
@@ -14,12 +14,12 @@ To fire on local server, `git clone` the repository and run `ruby -run -e httpd 
 - Via the stocks panel, users enter trades through the trade form, where fields are auto-populated with respective stock and date info. 
 - Submission disabled if user attempts to buy more stocks than their available cash, or sell more quantity than they own.
 
-![Trade](https://github.com/eating247/fideligard/blob/master/screenshots/2.png)
+![Trade]()
 
 - All transactions up to selected date can be sorted according to date, price, ticker, or type (buy/sell).
 
-![Transactions](https://github.com/eating247/fideligard/blob/master/screenshots/3.png)
+![Transactions]()
 
 - User's portfolio updates according to selected date, as adjusted through the date slider.
 
-![Portfolio](https://github.com/eating247/fideligard/blob/master/screenshots/4.png)
+![Portfolio]()

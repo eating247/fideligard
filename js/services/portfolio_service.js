@@ -15,17 +15,14 @@ Fideligard.factory("PortfolioService",
 
     var _getPositions = function() {
       _positions = [];
-      console.log(_trades)
       var filtered = _filterBeforeDate();
-      console.log(filtered)
+      // console.log(filtered.length, 'trades at this date')
 
       // aggregate by symbol
       filtered.forEach(function(trade) {
         var position = PortfolioService.findPos(trade.symbol);
-        console.log(trade.symbol, position, 'position')
         if (!position) {
           // if position obj doesn't exist for trades for this symbol, create + populate with price info relative to selected date
-          console.log('creating position for ', trade.symbol)
           var currentPrices = _findPrices(trade.symbol);
           _positions.push(
                 position = {
@@ -52,8 +49,6 @@ Fideligard.factory("PortfolioService",
       var filtered = [];
       filtered.push(
         _trades.filter( function(trade) {
-          console.log(trade.date, _date())
-          console.log(trade.date <= _date())
           return trade.date <= _date();
         })
       )

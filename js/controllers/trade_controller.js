@@ -24,7 +24,7 @@ Fideligard.controller("TradeCtrl",
         // if buying: make sure cash can cover trade
         return $scope.cost() < $scope.cash ? true : false;
       } else {
-        // if selling: cannot sell more quantity than they own
+        PortfolioService.getPositions();
         var position = PortfolioService.findPos($scope.newTrade.symbol)
         return position && (position.quantity >= $scope.newTrade.quantity) ? true: false; 
       } 
@@ -32,6 +32,7 @@ Fideligard.controller("TradeCtrl",
 
     $scope.submitTrade = function() {
       // validate + store in trade service
+      console.log($scope.newTrade)
       if ($scope.orderStatus()) {
         TradeService.save($scope.newTrade);
         $state.go('stocks.transactions');
