@@ -5,7 +5,7 @@ Fideligard.factory("StockService",
 
     // var _stockSymbols = ['GOOG', 'MSFT', 'TSLA', 'VTI', 'AAPL', 'PG', 'YHOO', 'FB', 'WMT', 'SSNLF', 'BP', 'GM', 'HP', 'VZ', 'T', 'COST'];
 
-    var _stockSymbols = ['MSFT'];
+    var _stockSymbols = ['MSFT', 'AAPL', 'GOOG', 'TSLA', 'FB'];
 
     var _stocks = [];
 
@@ -50,11 +50,10 @@ Fideligard.factory("StockService",
       //          }, function(response) {
       //           console.log("RESPONSE FAILED")
       //           console.error(response);
-      //           _stocks = response;
-      //           console.table(_stocks)
-      //           _processData(_stocks)
       //          })
-      _stocks = [response]
+      // fallback on hardcoded api files
+      _stockSymbols = ['MSFT', 'AAPL', 'GOOG', 'TSLA', 'FB'];
+      _stocks = responses;
       _processData(_stocks);
     }
 
