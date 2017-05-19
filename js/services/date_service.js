@@ -2,9 +2,10 @@ Fideligard.factory("DateService", ["_",
   function(_) {
     var DateService = {};
 
-    var _value = 0;
+    var _value = 50;
 
-    var _date = new Date(2016, 5, _value); // initialized value
+    // initialized value
+    var _date = moment('2016-05-31').add(_value, 'days').toDate(); 
 
     DateService.date = function() {
       return _date;
@@ -25,20 +26,22 @@ Fideligard.factory("DateService", ["_",
 
     // processes date input from slider form
     DateService.setDateValue = function(value) {
-      _date = new Date(2016, 5, value)
+      _value = value;
+      // _date = new Date(2016, 5, value)
+      _date = moment('2016-05-31').add(_value, 'days').toDate();
       return _date;
     }
 
-    // processes date input from stock service
+    // for stock service data processing
     DateService.setHyphenDateValue = function(value) {
-      _date = new Date(2016, 5, value)
-      return DateService.hyphenFormat();
+      var date = moment('2016-05-31').add(value, 'days').toDate();
+      return date.toISOString().slice(0,10);
     }    
 
     // provides date for selected date - n days
     DateService.nDaysAgo = function(n) {
-      one = new Date(2016, 5, (_value - n));
-      return one.toISOString().slice(0,10);
+      var n = new Date(2016, 5, (_value - n));
+      return n.toISOString().slice(0,10);
     }
 
     return DateService;

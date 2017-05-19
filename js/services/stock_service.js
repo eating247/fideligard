@@ -42,19 +42,21 @@ Fideligard.factory("StockService",
       //          .then(function(response) {
       //             console.table(response)
       //             for(var i = 0; i < response.length; i++) {
-      //               _stocks.push(response[i].dataset.data);
+      //               _stocks.push(response[i]);
       //             };
       //             _processData(_stocks)
       //             return _stockData;
       //          }, function(response) {
       //           console.error(response);
+                // hard coded response object in case api calls fail
       //          })
       _stocks.push(response)
       _processData(_stocks)
     }
 
-    // organize stock info by date + symbol
     var _processData = function(stocks) {
+      // creating _stockData object for easier reference
+      // organizes stock info by symbol + date
       _stocks.forEach(function(stock) {
         var sym = stock.dataset.dataset_code;
         var data = stock.dataset.data;
@@ -65,7 +67,6 @@ Fideligard.factory("StockService",
           _stockData[sym][date] = price;
         }
 
-        console.log("HELLOOOOOO")
         // for missing dates, use closing price from day before
         for(var i = 1; i < 180; i++) {
           var date = DateService.setHyphenDateValue(i);
@@ -82,11 +83,13 @@ Fideligard.factory("StockService",
       var oneDayBefore = DateService.nDaysAgo(1);
       var sevenDaysBefore = DateService.nDaysAgo(7);
       var thirtyDaysBefore = DateService.nDaysAgo(30)
+
       // contains objects holding data for each row in stock panel
       var displayedData = []; 
 
+      // parse data to be displayed for each stock
       _stockSymbols.forEach(function(sym) {
-        var price = _stockData[sym][date]
+        var price = _stockData[sym][date];
         displayedData.push({
           symbol: sym,
           price: price,
