@@ -4,6 +4,8 @@
 
 An AngularJS single-page web application using UI-Router multi-view states, NoSQL data modeling, and modular code to create a historical stock portfolio simulator with trading data via the Quandl API.
 
+[View it live here.](http://tt-wang.me/fideligard/)
+
 To fire on local server, `git clone` the repository and run `ruby -run -e httpd . -p 3000`.
 
 ## Features
