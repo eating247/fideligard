@@ -19,7 +19,7 @@ To fire on local server, `git clone` the repository and run `ruby -run -e httpd 
 
 ![Invalid Trade](https://github.com/eating247/fideligard/blob/master/screenshots/trade-invalid.png)
 
-- All transactions up to selected date can be sorted according to date, price, ticker, or type (buy/sell).
+- All transactions up to selected date can be sorted according to date, price, ticker, or type (Buy/Sell).
 
 ![Transactions](https://github.com/eating247/fideligard/blob/master/screenshots/transactions.png)
 
